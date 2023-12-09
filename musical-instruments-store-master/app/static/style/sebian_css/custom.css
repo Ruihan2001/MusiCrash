@@ -1,0 +1,82 @@
+/*------------------------------------------------------------------
+    ADD YOUR OWN STYLING HERE AVOID TO USE STYLE.CSS AND MAIN.CSS
+	
+	IT WILL BE HELPFUL FOR YOU IN FUTURE UPDATES
+-------------------------------------------------------------------*/
+.margin-reduce-20{
+    margin-bottom: -20px;
+}
+
+.margin-top-reduce-10{
+    margin-top: -20px;
+}
+
+.margin-top-add-10{
+    margin-top: 10px;
+}
+.margin-top-40{
+    margin-top: 40px;
+}
+.navajowhitewhite-font{
+    color: navajowhite;
+}
+
+.antiquewhite-font{
+    color: antiquewhite;
+}
+.black-font{
+    color: black !important;
+}
+
+.lightgrey{
+    color: lightgrey;
+}
+
+.background-antiquewhite{
+    background-color: antiquewhite !important;
+}
+.background-navajowhite{
+    background-color: navajowhite !important;
+}
+
+.background-transparent{
+    background-color: transparent !important;
+}
+
+.background-boarder{
+    border-radius: 5px !important;
+    border: 1px antiquewhite !important;
+    padding: 2px;
+}
+
+.darkgary-font{
+    color: darkgray !important;
+}
+
+.search-font-size{
+    font-size: 20px !important;
+}
+
+.background-f2f2f2{
+    background-color: #f2f2f2 !important;
+}
+
+.margin-left{
+    margin-left: 11%;
+}
+.margin-left-5{
+    margin-left: 20px;
+}
+
+.margin-left-4{
+    margin-left: 10px;
+}
+
+.page_item_active{
+    background-color: darkgray !important;
+}
+
+.file-box{ position:relative;width:100%}
+.txt{ height:40%; border:1px solid #cdcdcd; width:180px;}
+.file-btn{ background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;}
+.file{ position:absolute; top:10%; right:95px; height:50px;filter:alpha(opacity:0);opacity: 0;width:260px }

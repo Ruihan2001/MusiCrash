@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>繆斯克拉斯 - 商品管理</title>
+    <link rel="stylesheet" href="../static/style/chat.css">
+    <script src="../../static/js/sebian_js/jquery-1.11.3.js"></script>
+    <script src="{{ url_for('static',filename='script/socket.io.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/av-min.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/productList.js') }}"></script>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="bg-gray-100 dark:bg-gray-900 dark:text-white text-gray-600 h-screen flex overflow-hidden text-sm">
+    <div class="flex-grow overflow-hidden h-full flex flex-col">
+        <div class="h-16 lg:flex w-full border-b border-gray-200 dark:border-gray-800 hidden px-10">
+            {#        <input type="button" class="btn" value="back" onclick="javascript:history.back(-1);";/>#}
+            <a href="{{ url_for('ch.staff_index') }}"><img src="../static/image/back.png" style="height: 50px"></a>
+            <div class="ml-auto flex items-center space-x-7">
+                <button class="flex items-center">
+          <span class="relative flex-shrink-0">
+            <img class="w-7 h-7 rounded-full" src="../static/img/t.png" alt="profile" />
+            <span class="absolute right-0 -mb-0.5 bottom-0 w-2 h-2 rounded-full bg-green-500 border border-white dark:border-gray-900"></span>
+          </span>
+                    <span class="ml-2">管理员</span>
+                    <svg viewBox="0 0 24 24" class="w-4 ml-1 flex-shrink-0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="flex-grow flex overflow-x-hidden">
+            <div class="flex-grow bg-white dark:bg-gray-900 overflow-y-auto">
+                <div class="sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-200 bg-white dark:bg-gray-900 dark:text-white dark:border-gray-800 sticky top-0">
+                    <div class="flex w-full items-center">
+                        <div class="flex items-center text-3xl text-gray-900 dark:text-white">
+                            <img src="../static/img/t.png" class="w-12 mr-4 rounded-full" alt="profile" />
+                            管理员
+                        </div>
+                        <!--            <div class="ml-auto sm:flex hidden items-center justify-end">-->
+                        <!--              <div class="text-right">-->
+                        <!--                <div class="text-xs text-gray-400 dark:text-gray-400">No. of letters received</div>-->
+                        <!--                <div class="text-gray-900 text-lg dark:text-white">2,794</div>-->
+                        <!--              </div>-->
+                        <!--              <button class="w-8 h-8 ml-4 text-gray-400 shadow dark:text-gray-400 rounded-full flex items-center justify-center border border-gray-200 dark:border-gray-700">-->
+                        <!--                <svg viewBox="0 0 24 24" class="w-4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">-->
+                        <!--                  <circle cx="12" cy="12" r="1"></circle>-->
+                        <!--                  <circle cx="19" cy="12" r="1"></circle>-->
+                        <!--                  <circle cx="5" cy="12" r="1"></circle>-->
+                        <!--                </svg>-->
+                        <!--              </button>-->
+                        <!--            </div>-->
+                    </div>
+                    <div class="flex items-center space-x-3 sm:mt-7 mt-4">
+                        <a href="#" class="px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5">商品列表</a>
+                        <!--            <a href="#" class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5">Transfer</a>-->
+                        <!--            <a href="#" class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5 sm:block hidden">Budgets</a>-->
+                        <!--            <a href="#" class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5 sm:block hidden">Notifications</a>-->
+                        <!--            <a href="#" class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5 sm:block hidden">Cards</a>-->
+                    </div>
+                </div>
+                <div class="sm:p-7 p-4">
+                    <div class="flex w-full items-center mb-7">
+                        <button class="inline-flex items-center h-8 pl-2.5 pr-2 rounded-md shadow text-gray-700 dark:text-gray-400 dark:border-gray-800 border border-gray-200 leading-none py-0">
+                            <a href="{{ url_for('test.testProductEditor') }}">新建商品</a>
+                        </button>
+                        {#            <button class="inline-flex mr-3 items-center h-8 pl-2.5 pr-2 rounded-md shadow text-gray-700 dark:text-gray-400 dark:border-gray-800 border border-gray-200 leading-none py-0">#}
+                        {#              <svg viewBox="0 0 24 24" class="w-4 mr-2 text-gray-400 dark:text-gray-600" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">#}
+                        {#                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>#}
+                        {#                <line x1="16" y1="2" x2="16" y2="6"></line>#}
+                        {#                <line x1="8" y1="2" x2="8" y2="6"></line>#}
+                        {#                <line x1="3" y1="10" x2="21" y2="10"></line>#}
+                        {#              </svg>#}
+                        {#              Last 30 days#}
+                        {#              <svg viewBox="0 0 24 24" class="w-4 ml-1.5 text-gray-400 dark:text-gray-600" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">#}
+                        {#                <polyline points="6 9 12 15 18 9"></polyline>#}
+                        {#              </svg>#}
+                        {#            </button>#}
+                        {#            <button class="inline-flex items-center h-8 pl-2.5 pr-2 rounded-md shadow text-gray-700 dark:text-gray-400 dark:border-gray-800 border border-gray-200 leading-none py-0">#}
+                        {#              Filter by#}
+                        {#              <svg viewBox="0 0 24 24" class="w-4 ml-1.5 text-gray-400 dark:text-gray-600" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">#}
+                        {#                <polyline points="6 9 12 15 18 9"></polyline>#}
+                        {#              </svg>#}
+                        {#            </button>#}
+                        <div class="ml-auto text-gray-500 text-xs sm:inline-flex hidden items-center">
+                            <span class="mr-3">页数 {{ pagination["current_page"] }} /总计 {{ pagination["page"] }}</span>
+                            {% if pagination["has_pre"] %}
+                                <a href="{{ url_for('ch.productList', user_id = user_id, page=pagination['pre_page']) }}">
+                                    <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none"><</button>
+                                </a>
+                            {% endif %}
+                            {% if pagination["has_next"] %}
+                                <a href="{{ url_for('ch.productList', user_id = user_id, page=pagination['next_page']) }}">
+                                    <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">></button>
+                                </a>
+                            {% endif %}
+
+                            {#              <button class="inline-flex mr-2 items-center h-8 w-8 justify-center text-gray-400 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none py-0">#}
+                            {#                <svg class="w-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">#}
+                            {#                  <polyline points="15 18 9 12 15 6"></polyline>#}
+                            {#                </svg>#}
+                            {#              </button>#}
+                            {#              <button class="inline-flex items-center h-8 w-8 justify-center text-gray-400 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none py-0">#}
+                            {#                <svg class="w-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">#}
+                            {#                  <polyline points="9 18 15 12 9 6"></polyline>#}
+                            {#                </svg>#}
+                            {#              </button>#}
+                        </div>
+                    </div>
+                    <table class="w-full text-left">
+                        <thead>
+                        <tr class="text-gray-400">
+                            <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">商品名称</th>
+                            <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">品牌</th>
+                            <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 hidden md:table-cell">价格</th>
+                            <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 sm:text-gray-400 text-white">更新时间</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-gray-600 dark:text-gray-100">
+                        {% for i in lst %}
+                            <tr>
+                                <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
+                                    <div class="flex items-center">
+                                        <svg viewBox="0 0 24 24" class="w-4 mr-5 text-gray-400" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                                        </svg>
+                                        {{ i[1].get('title').get('chinese') }}
+                                    </div>
+                                </td>
+                                <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
+                                    <div class="flex items-center">
+                                        <!--                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.001 512.001" class="w-7 h-7 p-1.5 mr-2.5 rounded-lg border border-gray-200 dark:border-gray-800">-->
+                                        <!--                      <path fill="#03a9f4" d="M425.457 117.739c-3.121-1.838-6.961-1.966-10.197-.341-3.231 1.629-5.416 4.786-5.803 8.384-.384 3.499-.981 6.997-1.728 10.667-20.885 94.784-62.827 140.885-128.256 140.885h-96c-5.062.009-9.42 3.574-10.432 8.533l-32 149.995-5.717 38.187c-3.287 17.365 8.125 34.107 25.489 37.394 1.915.362 3.858.549 5.807.558h64.213c14.718.045 27.55-10 31.04-24.299l25.941-103.701h55.659c65.685 0 111.083-52.373 127.829-147.477 11.054-45.286-7.234-92.668-45.845-118.785z" />-->
+                                        <!--                      <path fill="#283593" d="M405.339 38.017C384.261 14.108 354.012.286 322.139.001h-176.64C119.064-.141 96.558 19.2 92.721 45.355L37.873 411.243c-2.627 17.477 9.41 33.774 26.887 36.402 1.586.239 3.189.357 4.793.356h81.92c5.062-.009 9.42-3.574 10.432-8.533l30.187-140.8h87.467c75.904 0 126.059-53.056 149.099-157.867.926-4.178 1.638-8.4 2.133-12.651 5.348-32.335-3.981-65.372-25.452-90.133z" />-->
+                                        <!--                    </svg>-->
+                                        {{ i[0].get('category').get('title').get('chinese') }}
+                                    </div>
+                                </td>
+                                <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 md:table-cell hidden">{{ i[1].get('price').get('dollar') }}</td>
+                                <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
+                                    <div class="flex items-center">
+                                        <div class="sm:flex hidden flex-col">
+                                            {{ i[1].get('updatedAt') }}
+                                            <div class="text-gray-400 text-xs"></div>
+                                        </div>
+                                        <a href="{{ url_for('test.testProductEditorUpdate', id=i[1].id) }}" class="w-8 h-8 inline-flex items-center justify-center text-gray-400 ml-auto">
+                                            <!--                      <svg viewBox="0 0 24 24" class="w-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">-->
+                                            <!--                        <circle cx="12" cy="12" r="1"></circle>-->
+                                            <!--                        <circle cx="19" cy="12" r="1"></circle>-->
+                                            <!--                        <circle cx="5" cy="12" r="1"></circle>-->
+                                            <svg t="1649503013040" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="21412" width="30" height="30">
+                                                <path d="M749.1072 939.6224H260.608c-97.2288 0-176.384-79.104-176.384-176.384V291.328c0-97.2288 79.104-176.384 176.384-176.384h247.2448c14.1312 0 25.6 11.4688 25.6 25.6s-11.4688 25.6-25.6 25.6H260.608c-69.0176 0-125.184 56.1664-125.184 125.184v471.9104c0 69.0176 56.1664 125.184 125.184 125.184h488.4992c69.0176 0 125.184-56.1664 125.184-125.184v-233.6768c0-14.1312 11.4688-25.6 25.6-25.6s25.6 11.4688 25.6 25.6v233.6768c0 97.28-79.104 176.384-176.384 176.384z" fill="#434A54" p-id="21413"></path>
+                                                <path d="M899.8912 529.5616v233.6768c0 83.2512-67.4816 150.784-150.784 150.784H260.608c-83.2512 0-150.784-67.4816-150.784-150.784V291.328c0-83.2512 67.4816-150.784 150.784-150.784h463.872c97.6384 0 176.6912 79.4112 176.2816 177.0496l-0.8704 211.968z" fill="#FFD16C" p-id="21414"></path>
+                                                <path d="M385.3824 133.5808s-165.632 21.8624-165.632 141.7216v501.2992c0 30.1568 2.6624 107.8272 132.1472 119.8592-91.9552 0-247.04-2.2528-247.04-123.648V302.3872c0-73.1136-14.6432-170.2912 280.5248-168.8064z" fill="#FFE8C0" p-id="21415"></path>
+                                                <path d="M619.2128 140.5952s166.3488 21.6576 166.3488 140.4416v496.7424c0 29.9008-2.6624 106.8032-132.7104 118.784 92.3648 0 248.064-2.2528 248.064-122.5216V307.9168c0-72.4992 13.7728-181.504-281.7024-167.3216z" fill="#FFC50B" p-id="21416"></path>
+                                                <path d="M749.1072 939.6224H260.608c-97.2288 0-176.384-79.104-176.384-176.384V291.328c0-97.2288 79.104-176.384 176.384-176.384h247.2448c14.1312 0 25.6 11.4688 25.6 25.6s-11.4688 25.6-25.6 25.6H260.608c-69.0176 0-125.184 56.1664-125.184 125.184v471.9104c0 69.0176 56.1664 125.184 125.184 125.184h488.4992c69.0176 0 125.184-56.1664 125.184-125.184v-233.6768c0-14.1312 11.4688-25.6 25.6-25.6s25.6 11.4688 25.6 25.6v233.6768c0 97.28-79.104 176.384-176.384 176.384z" fill="#434A54" p-id="21417"></path>
+                                                <path d="M526.2336 623.104l-112.128 20.3264c-20.0704 3.6352-37.376-14.3872-32.9216-34.304l24.1152-107.4176c1.1776-5.2736 3.84-10.0864 7.68-13.9264l377.0368-377.0368a28.4928 28.4928 0 0 1 40.3456 0l87.552 87.552a28.4928 28.4928 0 0 1 0 40.3456l-376.576 376.576c-4.1472 4.096-9.3696 6.8608-15.104 7.8848z" fill="#7BD3FF" p-id="21418"></path>
+                                                <path d="M832.6144 119.808a28.4928 28.4928 0 0 0-40.3456 0L415.232 496.8448c-3.84 3.84-6.5024 8.6528-7.68 13.9264l-24.1152 107.4176c-1.4336 6.2976-0.6656 12.3904 1.6896 17.664l483.1232-480.3072-35.6352-35.7376z" fill="#AEECFF" p-id="21419"></path>
+                                                <path d="M408.9856 669.4912c-14.592 0-28.672-5.888-39.0144-16.64a54.10304 54.10304 0 0 1-13.7728-49.3056l24.1152-107.4176c2.2528-10.0352 7.2704-19.1488 14.5408-26.4192l377.0368-377.0368c21.0944-21.0944 55.4496-21.0944 76.544 0l87.552 87.552c10.24 10.24 15.872 23.808 15.872 38.2464 0 14.4384-5.632 28.0576-15.872 38.2464l-376.576 376.576a54.00576 54.00576 0 0 1-28.6208 15.0016l-112.0768 20.3264c-3.2256 0.6144-6.5024 0.8704-9.728 0.8704z m401.2032-541.44a2.8672 2.8672 0 0 0-2.048 0.8704L431.104 505.9072c-0.4096 0.4096-0.6656 0.8704-0.768 1.4336l-24.1152 107.4176c-0.1024 0.3584-0.3584 1.536 0.768 2.6624s2.2528 0.9216 2.6112 0.8704l112.128-20.3264c0.5632-0.1024 1.1264-0.4096 1.536-0.8192l376.576-376.576a2.9696 2.9696 0 0 0 0-4.1472l-87.552-87.552a3.11296 3.11296 0 0 0-2.0992-0.8192z" fill="#434A54" p-id="21420"></path></svg>
+                                            </svg>
+                                        </a>
+                                        <a href="" onclick="deleteProduct('{{ i[1].id }}')" class="w-8 h-8 inline-flex items-center justify-center text-gray-400 ml-auto">
+                                            <svg t="1653485707481" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3576" width="30" height="30">
+                                                <path d="M896.042667 256a21.333333 21.333333 0 0 0-21.333334-21.333333h-725.333333a21.333333 21.333333 0 0 0 0 42.666666h725.333333a21.333333 21.333333 0 0 0 21.333334-21.333333z" fill="#0400FF" p-id="3577"></path>
+                                                <path d="M875.818667 234.666667l1.066666 0.128 1.066667 0.128 1.066667 0.170666 1.024 0.256 1.024 0.298667 0.981333 0.298667 0.981333 0.384 0.938667 0.426666 0.896 0.426667 0.896 0.597333 0.853333 0.554667 0.853334 0.554667 0.810666 0.64 0.768 0.682666 0.725334 0.725334 0.725333 0.725333 0.682667 0.768 0.64 0.810667 0.597333 0.853333 0.554667 0.853333 0.512 0.853334 0.469333 0.938666 0.426667 0.981334 0.384 0.938666 0.341333 0.981334 0.256 1.024 0.256 1.024 0.170667 1.066666 0.128 1.066667 0.085333 1.066667 0.042667 1.109333-0.042667 1.109333-0.085333 1.066667-0.128 1.066667-0.170667 1.066666-0.256 1.024-0.256 1.024-0.341333 0.981334-0.384 0.981333-0.426667 0.938667-0.469333 0.853333-0.512 0.938667-0.554667 0.853333-0.597333 0.853333-0.64 0.810667-0.682667 0.768-0.725333 0.768-0.725334 0.682667-0.768 0.682666-0.810666 0.64-0.853334 0.597334-0.853333 0.554666-0.896 0.512-0.896 0.426667-0.938667 0.426667-0.981333 0.426666-0.981333 0.341334-1.024 0.256-1.024 0.256-1.066667 0.170666-1.066667 0.128-1.066666 0.085334H148.266667l-1.066667-0.085334-1.066667-0.128L145.066667 276.906667l-1.024-0.256-1.024-0.256-0.981334-0.341334-0.981333-0.426666-0.938667-0.426667-0.896-0.426667-0.896-0.512-0.853333-0.554666-0.853333-0.597334-0.810667-0.64-0.768-0.682666-0.725333-0.682667-0.725334-0.768-0.682666-0.768-0.64-0.853333-0.597334-0.768-0.554666-0.896-0.512-0.896-0.469334-0.896-0.426666-0.938667-0.384-0.981333-0.341334-0.981334-0.256-1.024-0.256-1.024-0.170666-1.066666-0.128-1.066667-0.085334-1.066667L128.042667 256l0.042666-1.109333 0.085334-1.066667 0.128-1.066667 0.170666-1.066666 0.256-1.024 0.256-1.024 0.341334-0.981334 0.384-0.938666 0.426666-0.981334 0.469334-0.896 0.512-0.896 0.554666-0.853333 0.597334-0.853333 0.64-0.853334 0.682666-0.725333 0.725334-0.725333 0.725333-0.725334 0.768-0.682666 0.810667-0.64 0.853333-0.554667 0.853333-0.554667 0.896-0.554666 0.896-0.469334 0.938667-0.426666 0.981333-0.426667 0.981334-0.256 1.024-0.298667 1.024-0.256 1.066666-0.170666 1.066667-0.128 1.066667-0.085334 1.109333-0.042666h726.442667zM149.632 256h724.821333H149.632z" fill="#0400FF" p-id="3578"></path>
+                                                <path d="M405.333333 469.333333a21.333333 21.333333 0 0 0-42.666666 0v256a21.333333 21.333333 0 0 0 42.666666 0v-256z" fill="#0400FF" p-id="3579"></path>
+                                                <path d="M385.109333 448l1.066667 0.128 1.024 0.128 1.066667 0.170667 1.066666 0.256 1.024 0.298666 0.981334 0.298667 0.938666 0.384 0.981334 0.426667 0.853333 0.426666 0.938667 0.597334 0.853333 0.554666 0.853333 0.554667 0.768 0.64 0.810667 0.682667 0.725333 0.725333 0.682667 0.725333 0.725333 0.768 0.597334 0.810667 0.597333 0.853333 0.597333 0.853334 0.426667 0.853333 0.512 0.938667 0.426667 0.981333 0.426666 0.938667 0.298667 0.981333 0.298667 1.024 0.256 1.024 0.128 1.066667 0.170666 1.066666 0.042667 1.066667L405.333333 469.333333v256l-0.085333 1.109334v1.066666l-0.213333 1.066667-0.128 1.066667-0.256 1.024-0.298667 1.024-0.298667 0.981333-0.426666 0.981333-0.426667 0.938667-0.469333 0.853333-0.469334 0.938667-0.597333 0.853333-0.597333 0.853334-0.597334 0.810666-0.725333 0.768-0.682667 0.768-0.725333 0.682667-0.810667 0.682667-0.768 0.64-0.853333 0.597333-0.853333 0.554667-0.896 0.512-0.896 0.426666-0.981334 0.426667-0.938666 0.426667-0.981334 0.341333-1.024 0.256-1.066666 0.256-1.066667 0.170667-1.024 0.128-1.066667 0.085333h-2.218666l-1.066667-0.085333-1.066667-0.128-1.066666-0.170667-1.066667-0.256-0.981333-0.256-0.981334-0.341333-0.981333-0.426667-0.938667-0.426667-0.938666-0.426666-0.853334-0.512-0.853333-0.554667-0.853333-0.597333-0.810667-0.64-0.810667-0.682667-0.725333-0.682667-0.682667-0.768-0.682666-0.768-0.64-0.853333-0.597334-0.768-0.554666-0.896-0.512-0.896-0.426667-0.896-0.426667-0.938667-0.426666-0.981333-0.341334-0.981333-0.256-1.024-0.256-1.024-0.170666-1.066667-0.170667-1.066667-0.042667-1.066666L362.666667 725.333333v-257.109333l0.085333-1.066667 0.170667-1.066666 0.170666-1.066667 0.256-1.024 0.256-1.024 0.384-0.981333 0.341334-0.938667 0.426666-0.981333 0.469334-0.896 0.512-0.896 0.554666-0.853334 0.597334-0.853333 0.64-0.853333 0.682666-0.725334 0.682667-0.725333 0.725333-0.725333 0.810667-0.682667 0.810667-0.64 0.853333-0.554667 0.853333-0.554666 0.853334-0.554667 0.938666-0.469333 0.938667-0.426667 0.981333-0.426667 0.981334-0.256 0.981333-0.298666 1.066667-0.256 1.066666-0.170667 1.066667-0.128 1.066667-0.085333L384 448h1.109333zM384 469.632v255.488-255.488z" fill="#0400FF" p-id="3580"></path>
+                                                <path d="M533.333333 469.333333a21.333333 21.333333 0 0 0-42.666666 0v256a21.333333 21.333333 0 0 0 42.666666 0v-256z" fill="#0400FF" p-id="3581"></path>
+                                                <path d="M513.152 448l1.066667 0.128 1.024 0.128 1.066666 0.170667 1.066667 0.256 1.024 0.298666 0.981333 0.298667 0.938667 0.384 0.981333 0.426667 0.853334 0.426666 0.938666 0.597334 0.853334 0.554666 0.853333 0.554667 0.768 0.64 0.810667 0.682667 0.725333 0.725333 0.682667 0.725333 0.725333 0.768 0.597333 0.810667 0.597334 0.853333 0.597333 0.853334 0.426667 0.853333 0.512 0.938667 0.426666 0.981333 0.426667 0.938667 0.298667 0.981333 0.298666 1.024 0.256 1.024 0.128 1.066667 0.170667 1.066666 0.042667 1.066667 0.085333 1.109333v256l-0.085333 1.109334v1.066666l-0.213334 1.066667-0.128 1.066667-0.256 1.024-0.298666 1.024-0.298667 0.981333-0.426667 0.981333-0.426666 0.938667-0.469334 0.853333-0.469333 0.938667-0.597333 0.853333-0.597334 0.853334-0.597333 0.810666-0.725333 0.768-0.682667 0.768-0.725333 0.682667-0.810667 0.682667-0.768 0.64-0.853333 0.597333-0.853334 0.554667-0.896 0.512-0.896 0.426666-0.981333 0.426667-0.938667 0.426667-0.981333 0.341333-1.024 0.256-1.066667 0.256-1.066666 0.170667-1.024 0.128-1.066667 0.085333h-2.218667l-1.066666-0.085333-1.066667-0.128-1.066667-0.170667-1.066666-0.256-0.981334-0.256-0.981333-0.341333-0.981333-0.426667-0.938667-0.426667-0.938667-0.426666-0.853333-0.512-0.853333-0.554667-0.853334-0.597333-0.810666-0.64-0.810667-0.682667-0.725333-0.682667-0.682667-0.768-0.682667-0.768-0.64-0.853333-0.597333-0.768-0.554667-0.896-0.512-0.896-0.426666-0.896-0.426667-0.938667-0.426667-0.981333-0.341333-0.981333-0.256-1.024-0.256-1.024-0.170667-1.066667-0.170666-1.066667-0.042667-1.066666L490.666667 725.333333v-257.109333l0.085333-1.066667 0.170667-1.066666 0.170666-1.066667 0.256-1.024 0.256-1.024 0.384-0.981333 0.341334-0.938667 0.426666-0.981333 0.469334-0.896 0.512-0.896 0.554666-0.853334 0.597334-0.853333 0.64-0.853333 0.682666-0.725334 0.682667-0.725333 0.725333-0.725333 0.810667-0.682667 0.810667-0.64 0.853333-0.554667 0.853333-0.554666 0.853334-0.554667 0.938666-0.469333 0.938667-0.426667 0.981333-0.426667 0.981334-0.256 0.981333-0.298666 1.066667-0.256 1.066666-0.170667 1.066667-0.128 1.066667-0.085333L512 448h1.109333z m-1.109333 21.589333v255.488-255.488z" fill="#0400FF" p-id="3582"></path>
+                                                <path d="M661.333333 469.333333a21.333333 21.333333 0 0 0-42.666666 0v256a21.333333 21.333333 0 0 0 42.666666 0v-256z" fill="#0400FF" p-id="3583"></path>
+                                                <path d="M641.109333 448l1.066667 0.128 1.024 0.128 1.066667 0.170667 1.066666 0.256 1.024 0.298666 0.981334 0.298667 0.938666 0.384 0.981334 0.426667 0.853333 0.426666 0.938667 0.597334 0.853333 0.554666 0.853333 0.554667 0.768 0.64 0.810667 0.682667 0.725333 0.725333 0.682667 0.725333 0.725333 0.768 0.597334 0.810667 0.597333 0.853333 0.597333 0.853334 0.426667 0.853333 0.512 0.938667 0.426667 0.981333 0.426666 0.938667 0.298667 0.981333 0.298667 1.024 0.256 1.024 0.128 1.066667 0.170666 1.066666 0.042667 1.066667 0.085333 1.109333v256l-0.085333 1.109334v1.066666l-0.213333 1.066667-0.128 1.066667-0.256 1.024-0.298667 1.024-0.298667 0.981333-0.426666 0.981333-0.426667 0.938667-0.469333 0.853333-0.469334 0.938667-0.597333 0.853333-0.597333 0.853334-0.597334 0.810666-0.725333 0.768-0.682667 0.768-0.725333 0.682667-0.810667 0.682667-0.768 0.64-0.853333 0.597333-0.853333 0.554667-0.896 0.512-0.896 0.426666-0.981334 0.426667-0.938666 0.426667-0.981334 0.341333-1.024 0.256-1.066666 0.256-1.066667 0.170667-1.024 0.128-1.066667 0.085333h-2.218666l-1.066667-0.085333-1.066667-0.128-1.066666-0.170667-1.066667-0.256-0.981333-0.256-0.981334-0.341333-0.981333-0.426667-0.938667-0.426667-0.938666-0.426666-0.853334-0.512-0.853333-0.554667-0.853333-0.597333-0.810667-0.64-0.810667-0.682667-0.725333-0.682667-0.682667-0.768-0.682666-0.768-0.64-0.853333-0.597334-0.768-0.554666-0.896-0.512-0.896-0.426667-0.896-0.426667-0.938667-0.426666-0.981333-0.341334-0.981333-0.256-1.024-0.256-1.024-0.170666-1.066667-0.170667-1.066667-0.042667-1.066666L618.666667 725.333333v-257.109333l0.085333-1.066667 0.170667-1.066666 0.170666-1.066667 0.256-1.024 0.256-1.024 0.384-0.981333 0.341334-0.938667 0.426666-0.981333 0.469334-0.896 0.512-0.896 0.554666-0.853334 0.597334-0.853333 0.64-0.853333 0.682666-0.725334 0.682667-0.725333 0.725333-0.725333 0.810667-0.682667 0.810667-0.64 0.853333-0.554667 0.853333-0.554666 0.853334-0.554667 0.938666-0.469333 0.938667-0.426667 0.981333-0.426667 0.981334-0.256 0.981333-0.298666 1.066667-0.256 1.066666-0.170667 1.066667-0.128 1.066667-0.085333L640 448h1.109333z" fill="#0400FF" p-id="3584"></path>
+                                                <path d="M631.509333 128.597333c38.570667 1.450667 71.978667 35.754667 72.490667 74.24V277.333333h-384c0-36.010667-6.4-74.410667 5.802667-103.338666 10.88-25.6 36.693333-43.52 64.725333-45.312 80.213333-3.072 160.682667-1.066667 240.981333-0.085334zM394.666667 170.666667c-16.213333 0-31.744 15.36-32 32.213333V234.666667h298.666666c0-38.912-5.12-64-39.424-64-78.677333 0.085333-148.224 0-227.242666 0z" fill="#0400FF" p-id="3585"></path><path d="M789.333333 797.994667c-0.64 51.072-44.117333 96-95.616 97.962666-121.386667 1.536-242.773333 1.536-364.117333 0-50.688-1.92-94.250667-46.293333-94.890667-97.28V234.624h554.581334v563.370667zM277.333333 277.333333c0 174.677333-6.528 349.44 0.085334 524.074667 0.170667 2.304 0.426667 4.565333 0.853333 6.826667 4.608 24.32 26.282667 43.477333 51.029333 45.013333 121.514667 4.650667 243.285333 4.650667 364.8 0a57.344 57.344 0 0 0 52.565334-55.509333V277.333333h-469.333334z" fill="#0400FF" p-id="3586"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    {#          <div class="flex w-full mt-5 space-x-2 justify-end">#}
+                    {#            <button class="inline-flex items-center h-8 w-8 justify-center text-gray-400 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">#}
+                    {#              <svg class="w-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">#}
+                    {#                <polyline points="15 18 9 12 15 6"></polyline>#}
+                    {#              </svg>#}
+                    {#            </button>#}
+                    {#            <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">1</button>#}
+                    {#            <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-800 dark:text-white leading-none">2</button>#}
+                    {#            <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">3</button>#}
+                    {#            <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">4</button>#}
+                    {#            <button class="inline-flex items-center h-8 w-8 justify-center text-gray-400 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">#}
+                    {#              <svg class="w-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">#}
+                    {#                <polyline points="9 18 15 12 9 6"></polyline>#}
+                    {#              </svg>#}
+                    {#            </button>#}
+                    {#          </div>#}
+                    <div class="flex w-full mt-5 space-x-2 justify-end">
+                        {% if pagination["has_pre"] %}
+                            <a href="{{ url_for('ch.productList', user_id = user_id, page=pagination['pre_page']) }}">
+                                <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none"><</button>
+                            </a>
+                        {% endif %}
+                        {% if pagination["page"]//8 > 0 %}
+                            {% if pagination["current_page"] > pagination["page"] - 4 %}
+                                <a href="{{ url_for('ch.productList', user_id = user_id, page=1) }}">
+                                    <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">1</button>
+                                </a>
+                                <a href="">
+                                    <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">...</button>
+                                </a>
+                                {% for pagenum in range(pagination["page"]-4,pagination["page"]+1) %}
+                                    <a
+                                            href="{{ url_for('ch.productList', user_id = user_id, page=pagenum) }}">
+                                        <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none
+                                {% if pagenum  == pagination["current_page"] %}
+                                bg-gray-100 dark:bg-gray-800 dark:text-white
+                                {% endif %}
+                                ">{{ pagenum }}</button>
+                                    </a>
+                                {% endfor %}
+
+                            {% elif pagination["current_page"] > 4 %}
+                                <a href="{{ url_for('ch.productList', user_id = user_id, page=1) }}">
+                                    <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">1</button>
+                                </a>
+
+                                <a href="#.">...</a>
+                                {% for pagenum in range(pagination["current_page"]-2,pagination["current_page"]+3) %}
+                                    <a
+                                            href="{{ url_for('ch.productList', user_id = user_id, page=pagenum) }}">
+                                        <button class="{% if pagenum  == pagination["current_page"] %}
+                                bg-gray-100 dark:bg-gray-800 dark:text-white
+                                {% endif %}
+                                inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">{{ pagenum }}</button>
+                                    </a>
+                                {% endfor %}
+
+                                <a href="#.">
+                                    <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">...</button>
+                                </a>
+
+
+                                <a href="{{ url_for('ch.productList', user_id = user_id, page=pagination['page']) }}">
+                                    <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">{{ pagination["page"] }}</button>
+                                </a>
+
+                            {% else %}
+                                {% for pagenum in range(0,5) %}
+                                    <a
+                                            href="{{ url_for('ch.productList', user_id = user_id, page=pagenum+1) }}">
+                                        <button class="{% if pagenum + 1 == pagination["current_page"] %}
+                                bg-gray-100 dark:bg-gray-800 dark:text-white
+                                {% endif %}
+                                inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">{{ pagenum + 1 }}</button>
+                                    </a>
+                                {% endfor %}
+
+                                <a href="#.">
+                                    <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">...</button>
+                                </a>
+
+                                <a href="{{ url_for('ch.productList', user_id = user_id, page=pagination['page']) }}">
+                                    <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">{{ pagination["page"] }}</button>
+                                </a>
+                            {% endif %}
+                        {% else %}
+                            {% for pagenum in range(0, pagination["page"]) %}
+                                <a
+                                        href="{{ url_for('ch.productList', user_id = user_id, page=pagenum+1) }}">
+                                    <button class="{% if pagenum + 1 == pagination["current_page"] %}
+                            bg-gray-100 dark:bg-gray-800 dark:text-white
+                            {% endif %}
+                            inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">{{ pagenum + 1 }}</button>
+                                </a>
+                            {% endfor %}
+                        {% endif %}
+                        {% if pagination["has_next"] %}
+                            <a href="{{ url_for('ch.productList', user_id = user_id, page=pagination['next_page']) }}">
+                                <button class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">></button>
+                            </a>
+                        {% endif %}
+                        <!--{#              <li><a href="#.">1</a></li>#}-->
+                        <!--{#              <li><a href="#.">2</a></li>#}-->
+                        <!--{#              <li><a href="#.">3</a></li>#}-->
+                        <!--{#              <li><a href="#.">4</a></li>#}-->
+                        <!--{#              <li><a href="#.">5</a></li>#}-->
+                        <!--{#              <li><a href="#."><i class="fa fa-angle-right"></i></a></li>#}-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- partial -->
+
+</body>
+</html>

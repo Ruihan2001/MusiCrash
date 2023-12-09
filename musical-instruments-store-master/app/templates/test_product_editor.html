@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="product_id" content="{{ product_id }}">
+    <title>Title</title>
+    <script src="{{ url_for('static',filename='script/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/wangEditor_revise.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/socket.io.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/av-min.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/user.js') }}"></script>
+     <script src="{{ url_for('static',filename='js/product.js') }}"></script>
+</head>
+<body>
+<label>title: <input id='title' type="text"></label>
+<br>
+<label>description: <input id='description' type="text"></label>
+<br>
+<label>cover:<input type="file"></label>
+<hr>
+<div id="editor" style="margin: 20px"></div>
+<hr>
+<button onclick="submit()">submit</button>
+
+<script src="{{ url_for('static',filename='script/productEditor.js') }}"></script>
+<script>
+    let id=document.getElementsByTagName('meta')['product_id'].content
+    if(id!=='') {
+        getProductById(id, function (product) {
+            loadProduct(product)
+        })
+    }
+</script>
+</body>
+</html>

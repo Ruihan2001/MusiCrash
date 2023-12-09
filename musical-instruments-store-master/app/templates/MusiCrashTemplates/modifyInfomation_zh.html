@@ -1,0 +1,109 @@
+<!--用于修改用户信息的界面-->
+{% extends 'MusiCrashTemplates/base_zh.html'%}
+
+{% block title %}
+Modify Information
+{% endblock %}
+
+{% block sebian_css %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="container section-margin b">
+    <div class="row ackground-f2f2f2">
+          <div class="col-lg-12">
+            <div class="form-box">
+              <div class="section-title text-center">
+                <p class="d-inline-block">欢迎来到缪斯克拉斯</p>
+                <h2 class="background-transparent">修改你的个人信息</h2>
+                <p class="d-inline-block"><a onclick="reset($('#email').val())" class="text-decoration-underline">重置你的密码</a> </p>
+
+              </div>
+                <div class="messages"></div>
+                <div class="input__wrap controls">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <div class="entry">
+                          <label>用户名</label>
+                          <input id="form_name" type="text" class="darkgary-font" name="name" placeholder="输入你的用户名" required="required" data-error="需要填入用户名">
+                        </div>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <div class="entry">
+                          <label>电子邮箱</label>
+                          <input id="email" type="email" name="email" placeholder="输入你的电子邮箱地址" required="required" data-error="需要填入电子邮箱地址">
+                        </div>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <div class="entry">
+                          <label>电话</label>
+                          <input id="form_email" type="email" name="email" placeholder="输入你的电话" required="required" data-error="需要输入电话">
+                        </div>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <div class="entry">
+                          <label>地址</label>
+                          <input id="form_address" type="email" name="email" placeholder="输入你的地址" required="required" data-error="需要输入地址">
+                        </div>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="text-center">
+                        <div class="image-zoom w-auto d-inline-block" data-dsn="parallax">
+                          <button class="btn-form darkgary-font"><span class="label">发送消息</span><span class="icon-c"></span></button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+</div>
+{% endblock %}
+{% block sebian_script %}
+{{ super() }}
+<script src="{{ url_for('static',filename='script/examine_zh.js') }}"></script>
+
+{% endblock %}
+
+{% block end %}
+    <script>
+
+    let user=getLoginState()
+    $("#form_name").val(user.get('username'))
+    $("#email").val(user.get('email'))
+    $("#phone").val(user.get('mobilePhoneNumber'))
+    $("#address").val(user.get('address'))
+
+    async function submit() {
+        console.log("ok")
+        user.set('username',$("#form_name").val())
+        user.set('email',$("#email").val())
+        user.set('mobilePhoneNumber',$("#phone").val())
+        user.set('address',$("#address").val())
+        user.save().then((todo) => {
+          // 成功保存之后，执行其他逻辑
+            window.location.href = '/testinfo'
+        }, (error) => {
+          // 异常处理
+            alert(error)
+        });
+    }
+
+    </script>
+{% endblock %}

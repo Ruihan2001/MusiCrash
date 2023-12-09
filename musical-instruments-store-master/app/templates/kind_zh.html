@@ -1,0 +1,117 @@
+{% extends 'MusiCrashTemplates/base_zh.html'%}
+
+{% block title %}
+MusiCrash - Steinway
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="../../static/style/main_css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-3.3.4.css">
+{% endblock %}
+
+<!--&lt;!&ndash; 类别描述 &ndash;&gt;-->
+<!--<main class="main-root">-->
+<!--  <div id="dsn-scrollbar">-->
+    {% block content %}
+<!-- 下面是出现问题的div -->
+        <header data-dsn-header="project">
+      <div class="header-project p-relative h-100-v over-hidden" data-dsn-header="parallax">
+        <div id="dsn-hero-parallax-img" data-dsn-ajax="img" class="p-absolute w-100 h-100 over-hidden" data-overlay="6"><img class="cover-bg-img" src="{{ kind.get('img').url }}" alt=""></div>
+        <div class="margin-lr-100 h-100">
+          <div class="row align-items-center h-100">
+            <div class="content p-relative w-100">
+              <div class="intro-project">
+                <div id="dsn-hero-title" class="intro-title">
+                  <div class="metas d-inline-block"><span>经典品牌</span></div>
+                  <h1 class="title" data-dsn-ajax="title">{{ kind.get('title').get('chinese') }}</h1>
+                </div>
+                <p id="dsn-hero-description" class="description">1853年，德国移民亨利·恩格尔哈德·施坦威(Henry Engelhard Steinway)在纽约曼哈顿瓦里克街(Varick Street)的一个小阁楼里创立了施坦威父子公司(Steinway & Sons)。
+在接下来的30年里，亨利和他的儿子们谱写了现代钢琴制造的新篇章。
+他们用师徒相传的手工技艺制造钢琴。
+今天，施坦威钢琴是全世界97%以上的钢琴家的首选，是梦想钢琴和收藏家的项目，每个人都想拥有。</p>
+                <div id="dsn-hero-desc-items" class="intro-project-details d-flex">
+                  <div class="descrption-item">
+                    <h5>朗朗</h5>
+                    <p>“除了斯坦威，别无选择。”</p>
+                  </div>
+                  <div class="descrption-item">
+                    <h5>ROLE</h5>
+                    <p>建筑设计</p>
+                  </div>
+                  <div class="descrption-item">
+                    <h5>发布</h5>
+                    <p>2020年3月25日</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="https://www.behance.net/gallery/94300401/Black-Apartment-in-Heart-of-Capital-30m2?tracking_source=search_projects_recommended%7CArchitecture" target="_blank" class="link-vist p-absolute"><span class="link-vist-text">Visit Site</span>
+        <div class="link-vist-arrow">
+          <svg viewBox="0 0 80 80">
+            <polyline points="19.89 15.25 64.03 15.25 64.03 59.33"></polyline>
+            <line x1="64.03" y1="15.25" x2="14.03" y2="65.18"></line>
+          </svg>
+        </div>
+        </a>
+        <div class="scroll-d p-absolute"><img src="assets/img/scroll_down.svg" alt=""></div>
+      </div>
+    </header>
+    <div class="wrapper">
+        <!-- 最下面俩 Rim & Soundboard -->
+        {% for product in products %}
+      <div class="box-gallery-vertical box-gallery-content  section-margin section-padding" data-dsn-animate="section">
+        <div class="mask-bg"></div>
+        <div class="container">
+          <div class="row align-items-center h-100">
+            <div class="col-lg-6 dsn-z-index-2">
+              <div class="box-im" data-dsn-grid="move-up">
+                <a href="{{ url_for('ch.productInfo', product_id=product.id) }}">
+                  <img class="has-top-bottom" src="{{ product.get('cover').url }}" alt="" data-dsn-move="20%">
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="box-info">
+                <div class="title-cover theme-color" data-dsn-grid="move-section" data-dsn-opacity="0.03" data-dsn-duration="170%" data-dsn-move="0%">下拉</div>
+                <div>
+                  <a href="{{ url_for('ch.productInfo', product_id=product.id) }}">了解更多</a>
+                </div>
+                <br>
+                <div class="bg-mask-content ">
+                  <div class="mask-bg-2 dsn-up"></div>
+                  <h6 class="dsn-up">{{ product.get('title').get('chinese') }}</h6>
+                  <p class="dsn-up">{{ product.get('description').get('chinese') }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+
+
+    </div>
+
+      <div class="container">
+          <div class="myPagination" style="margin-left: 25%"></div>
+      </div>
+      <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+
+
+    <div class="next-project p-relative over-hidden section-padding mt-section" data-dsn-footer="project">
+      <div id="dsn-footer-hero" class="img-next-box  p-absolute w-100 h-100" data-overlay="5"><img class="cover-bg-img" src="../../static/img/project/project4/1.jpg" alt=""></div>
+      <div class="margin-lr-100 h-100">
+        <div class="row align-items-center h-100">
+          <div class="next-inner p-relative w-100">
+            <h2 class="bg-title p-absolute">下一个产品</h2>
+            <div id="dsn-footer-description" class="metas d-inline-block"><span>数字化艺术</span></div>
+            <h1 class="title"><a id="dsn-footer-title" href="project4.html" class="effect-ajax" data-dsn-ajax="next">国际化</a>
+              <div class="full-width img-box-shadow"></div>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{{ url_for('static',filename='script/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/socket.io.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/av-min.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/user.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/order.js') }}"></script>
+    <title>Title</title>
+</head>
+<body>
+<label>
+    username:
+    <input type="text" id="username">
+</label>
+<label>
+    password:
+    <input type="password" id="password">
+</label>
+<label>
+    email:
+    <input type="email" id="email">
+</label>
+<label>
+    phone:
+    <input type="text" id="phone">
+</label>
+<hr>
+<table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Item Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+    {% for product in products %}
+                    <tbody id=product{{product.get('objectId')}}><tr class="">
+                        <td id="name{{product.get('objectId')}}">{{ product.get('title').get('english')}}</td>
+                        <td id= "price{{product.get('objectId')}}">{{ product.get('price').get('dollar')}}</td>
+                        <td id = "description{{product.get('objectId')}}">{{ product.get('description').get('english')}}</td>
+                        <td><button type = "button" id={{product.get('objectId')}} onclick="MakeOrder(this)">Make a Order</button></td>
+                     </tr></tbody>
+    {% endfor %}
+                  </table>
+
+
+
+<hr>
+<button onclick="
+  signInWithUsername($('#username').val(),$('#password').val(),function(user) {
+    document.getElementById('result').innerText='login success!'
+    console.log(user)
+  },function(error) {
+    document.getElementById('result').innerText=error
+    console.log(error)
+  })
+">login</button>
+
+<button onclick="signUp($('#username').val(),null,null,$('#password').val(),function(user) {
+  document.getElementById('result').innerText='register success!'
+  console.log(user)
+},function(error) {
+  document.getElementById('result').innerText=error
+  console.log(error)
+})">register</button>
+
+<button onclick="logout();">logout</button>
+
+<button onclick="let user=getLoginState();
+   result= document.getElementById('result');
+if(user){
+    result.innerText='login already, current user is '+user.getUsername();
+}else{
+    result.innerText='not already login';
+}
+">check state</button>
+
+<button onclick="changeInfo($('#username').val(),$('#phone').val(),$('#email').val());">submit register</button>
+<p id="result"></p>
+</body>
+</html>

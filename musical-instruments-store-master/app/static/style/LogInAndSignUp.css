@@ -1,0 +1,214 @@
+/* define all of the object */
+* {
+    box-sizing: border-box;
+}
+/* define the style of the body */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-image: url("../img/project/project1/10.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: -20px 0 50px;
+}
+/* define the style of the h1 */
+h1 {
+    font-weight: bold;
+    margin: 0;
+}
+/* define the style of the p */
+p {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 5px;
+    margin: 20px 0 30px;
+}
+/* define the style of the a */
+a {
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    letter-spacing: 2px;
+    margin: 15px 0;
+}
+/* define the style of the a when mouse hover */
+a:hover {
+    font-size: 12px;
+    text-decoration: underline;
+}
+/* define the style of the box class */
+.box {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+}
+/* define the style of the form */
+.form-container {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    padding:  0 50px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+/* define the style of the form input */
+.form-container input {
+    background: #eee;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+    outline: none;
+}
+/* define the style of the form input when focus */
+.form-container input:focus {
+    border: solid 1px orange;
+}
+/* define the style of the form input when mouse hover */
+.form-container input:hover {
+    transform: scale(1.05);
+}
+/* define the style of the button */
+button {
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0);
+    background: #986035;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    cursor: pointer;
+}
+/* define the style of the activate button */
+button:active {
+    transform: scale(.95);
+}
+/* define the style of the button when mouse hover */
+button:hover {
+    transform: scale(.95);
+}
+/* define the style of the button when mouse hover */
+button:focus {
+    outline: none;
+}
+/* define the style of the button ghost */
+button.ghost {
+    background: transparent;
+    border-color: #fff;
+}
+/* define the style of the form container */
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all .6s ease-in-out;
+}
+/* define the style of the sign-in-container */
+.sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+/* define the style of the sign-up-container*/
+.sign-up-container {
+    left: 0;
+    width: 50%;
+    z-index: 1;
+    opacity: 0;
+}
+/* define the style of the overlay-container */
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform .6s ease-in-out;
+    z-index: 100;
+}
+/* define the style of the overlay */
+.overlay {
+    background: #ff416c;
+    background: linear-gradient(to right,  #553d34,#ffb342) no-repeat 0 0 / cover;
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateY(0);
+    transition: transform .6s ease-in-out;
+}
+/* define the style of the overlay panel */
+.overlay-panel {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    transform: translateY(0);
+    transition: transform .6s ease-in-out;
+}
+/* define the style of the overlay-right */
+.overlay-right {
+    right: 0;
+    transform: translateY(0);
+}
+/* define the style of the overlay-left */
+.overlay-left {
+    transform: translateY(-20%);
+}
+
+/* Move sign in to right */
+.box.right-panel-active .sign-in-container {
+    transform: translateY(100%);
+}
+
+/* Move overlay to left */
+.box.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
+
+/* Bring signup over sign in */
+.box.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+}
+
+/* Move overlay back to right */
+.box.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+/* Bring back the text to center */
+.box.right-panel-active .overlay-left {
+    transform: translateY(0);
+}
+
+/* Same effect for right */
+.box.right-panel-active .overlay-right {
+    transform: translateY(20%);
+}

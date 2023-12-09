@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="apple-touch-fullscreen" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+         <meta name="product_id" content="{{ product_id }}">
+
+        <title>Information upload</title>
+
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/base.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/home.css') }}">
+        <script src="{{ url_for('static',filename='script/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static',filename='script/wangEditor_revise.min.js') }}"></script>
+        <script src="{{ url_for('static',filename='js/jquery-3.1.1.min.js') }}"></script>
+        <script src="{{ url_for('static',filename='script/socket.io.js') }}"></script>
+        <script src="{{ url_for('static',filename='script/av-min.js') }}"></script>
+        <script src="{{ url_for('static',filename='script/user.js') }}"></script>
+        <script src="{{ url_for('static',filename='script/i18next.min.js') }}"></script>
+
+        <script src="{{ url_for('static',filename='js/product.js') }}"></script>
+        <link href="{{ url_for('static',filename='staff_index/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet" type="text/css">
+
+        <!-- web-fonts -->
+        <link href="//fonts.googleapis.com/css?family=Londrina+Outline" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+        <!-- //web-fonts -->
+        <style>
+            .cLabel{
+                font-size: 10px; !important;
+                margin: 10px; !important;
+                padding: 2px 10px; !important;
+                background: rgba(255, 255, 255, 0);!important;
+                border-radius: 50px;!important;
+                border: whitesmoke 2.5px solid;!important;
+                transition: 0.2s; !important;
+            }
+
+            .cLabel:hover{
+                background: whitesmoke;
+                color: darkred;
+                box-shadow: 0 13px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            }
+
+            .cLabel:active {
+              transform: translateY(4px);
+            }
+
+            .cLabel.choose {
+                background: white;
+                color: red;
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+              transform: translateY(2px);
+            }
+
+            .cLabel:after {
+                border: transparent;
+            }
+            .transferBtn {
+                font-size: 20px; !important;
+                margin: 15px; !important;
+                padding: 4px 10px; !important;
+                background: rgba(255, 255, 255, 0);!important;
+                border-radius: 50px;!important;
+                border: whitesmoke 2.5px solid;!important;
+                transition: 0.2s; !important;
+                font-weight: 20 !important;
+            }
+            .transferBtn:hover{
+                background: whitesmoke;
+                color: darkred;
+                box-shadow: 0 13px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            }
+    </style>
+    </head>
+    <body>
+        <section class="aui-content">
+            <a href="javascript:history.back(-1);"><img src="../../static/image/back.png" style="height: 50px;margin: 20px 0 0 20px"></a>
+            <div style="height:20px;"></div>
+            <div class="aui-content-up">
+                <form action="" name="form1" method="post">
+                <div class="row">
+
+                </div>
+                    <div class="aui-content-up-form">
+                        <div class="row">
+
+                            <div class="col-sm-9">
+                                 <h2><span>P</span>roduct
+                                <span>U</span>pload <span id="transLangBtn" class="transferBtn" onclick="changeLang()">english</span></h2>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="aui-form-group clear">
+                        <label class="aui-label-control">
+                           TITLE<em>*</em>
+                        </label>
+                        <div class="aui-form-input">
+                            <input type="text" class="aui-form-control-two" name="yourname" onBlur="checkna()" required id="title" placeholder="Enter the title">
+                            <span class="tips" id="divname"></span>
+                        </div>
+                    </div>
+                    <div class="aui-form-group clear">
+                        <label class="aui-label-control">
+                           PRICE<em>*</em>
+                        </label>
+                        <div class="aui-form-input">
+                            <input type="number" class="aui-form-control-two" name="yourname" onBlur="checkna()" required id="price" placeholder="Enter the price">
+                            <span class="tips" ></span>
+                        </div>
+                    </div>
+                    <div class="aui-form-group clear">
+                        <label class="aui-label-control">
+                            Description <em>*</em>
+                        </label>
+                        <div class="aui-form-input">
+                            <input type="text" class="aui-form-control-two" name="youphone" id="description" placeholder="Enter discription" onBlur="checkpsd1()" required/>
+                            <span class="tips" id="phone"></span>
+                        </div>
+                    </div>
+                    <div class="aui-form-group clear">
+                        <label class="aui-label-control">
+                            Cover <em>*</em>
+                            <span><= 5M</span>
+                        </label>
+                        <div class="aui-form-input">
+                            <div class="aui-content-img-box aui-content-full">
+                                <div class="aui-photo aui-up-img clear">
+                                    <section class="aui-file-up fl">
+                                        <img src="{{ url_for('static',filename='image/up.png') }}" class="add-img">
+                                        <input type="file" name="file" id="file" class="file" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple/>
+
+                                        <input type="file" name="fileField" id="fileField" class="file" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple/>
+
+                                    </section>
+                                    <span>
+                                        <img id="cover" src="" alt="no cover" class="pre-cover">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aui-form-group clear">
+
+                        <div id="editor" style="margin: 20px"></div>
+
+                        <hr>
+
+
+                    </div>
+                    <div id="category" class="aui-form-group clear">
+                     <h4>Labels </h4>
+                        {% for label in labels %}
+                              <button id="{{ label.id }}" class="cLabel" onclick="if(this.classList.contains('choose')){
+                                  {#this.classList.remove('choose')#}
+                              }else{
+                                              const buttons = $('.cLabel.choose');
+                                    buttons.each(function (a, b) {
+                                      // console.log(b)
+                                      b.classList.remove('choose')
+                                      })
+                                  this.classList.add('choose')
+                              }return false">{{ label.get('title').get('english') }}</button>
+                        {% endfor %}
+
+                    </div>
+                </form>
+                <br>
+            </div>
+            <div class="aui-btn-default">
+                <button class="aui-btn aui-btn-account" onclick="submit()">Submit</button>
+
+            </div>
+        </section>
+        <!-- mask begin -->
+        <div class="aui-mask aui-works-mask">
+            <div class="aui-mask-content">
+                <p class="aui-delete-text">Are you sure to remove your files?</p>
+                <p class="aui-check-text">
+                    <span class="aui-delete aui-accept-ok">Sure</span>
+                    <span class="aui-accept-no">Cancel</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- mask end -->
+        <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="{{ url_for('static',filename='js/up.js') }}"></script>
+        <script src="{{ url_for('static',filename='script/productEditor.js') }}"></script>
+        <script>
+             const buttons = $('.cLabel');
+             buttons[0].classList.add('choose')
+            let id=document.getElementsByTagName('meta')['product_id'].content;
+            if(id!=='') {
+                getProductById(id, function (product) {
+                    loadProduct(product)
+                })
+            }else{
+                const Product=AV.Object.extend('Product');
+                const Strings=AV.Object.extend('Strings');
+                const Price=AV.Object.extend('Price');
+                const HTMLs=AV.Object.extend('HTMLs');
+                currentProduct=new Product()
+                currentProduct.set('title',new Strings)
+                currentProduct.set('price',new Price)
+                currentProduct.set('description',new Strings)
+                currentProduct.set('detail',new HTMLs)
+            }
+            function changeLang(){
+                var transLangBtn = document.getElementById("transLangBtn");
+                console.log(transLangBtn.innerHTML)
+                if(transLangBtn.innerHTML==="chinese")    {
+                    transLangBtn.innerHTML="english";
+                    changeLanguage("english")
+                }
+                else{
+                    transLangBtn.innerHTML="chinese";
+                    changeLanguage("chinese")
+                }
+            }
+            document.getElementById("fileField").onchange=function () {
+                const imgUrl = window.URL.createObjectURL(document.getElementById("fileField").files[0])
+                document.getElementById('cover').src=imgUrl
+            }
+
+        </script>
+    </body>
+</html>

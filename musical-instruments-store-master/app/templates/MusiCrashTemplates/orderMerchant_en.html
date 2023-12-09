@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fill the order information</title>
+     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon"/>
+  <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon"/>
+    <!-- custom styles(optional) -->
+  <!-- FONTS ONLINE -->
+  <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <!--MAIN STYLE-->
+  <link href="../../static/style/sebian_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../../static/style/sebian_css/main.css" rel="stylesheet" type="text/css">
+  <link href="../../static/style/sebian_css/style.css" rel="stylesheet" type="text/css">
+  <link href="../../static/style/sebian_css/responsive.css" rel="stylesheet" type="text/css">
+  <link href="../../static/style/sebian_css/animate.css" rel="stylesheet" type="text/css">
+  <!-- ADD YOUR OWN STYLING HERE. AVOID TO USE STYLE.CSS AND MAIN.CSS. IT WILL BE HELPFUL FOR YOU IN FUTURE UPDATES -->
+  <link href="../../static/style/sebian_css/custom.css" rel="stylesheet" type="text/css">
+  <script src="../../static/js/sebian_js/jquery-1.11.3.js"></script>
+
+
+</head>
+<body>
+<div id="wrap">
+    <div class="content">
+        <section class=" section-p-30px sub-banner chart-page">
+          <div class="container">
+            <h4>View Order Details</h4>
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                {# 问题2 #}
+              <li><a href="{{ url_for('main.allOrderList') }}">Back</a></li>
+            </ol>
+          </div>
+        </section>
+        <section class="section-p-30px pages-in chart-page">
+            <div class="container">
+                <div class="shopping-cart">
+
+                  <!-- SHOPPING INFORMATION -->
+                  <div class="cart-ship-info">
+                    <div class="row">
+
+                      <!-- ESTIMATE SHIPPING & TAX -->
+                      <div class="col-sm-7">
+                        <h6>BILLING DETAILS</h6>
+                        <form>
+                          <ul class="row">
+
+                            <!-- *COUNTRY -->
+                            <!-- Name -->
+                            <li class="col-md-6">
+                              <label> *NAME
+                                <input id="name" type="text" name="first-name" value="{{order.get('name')}}" placeholder="" disabled>
+                              </label>
+                            </li>
+
+                            <li class="col-md-12">
+                              <!-- ADDRESS -->
+                              <label>*ADDRESS
+                                <input id="address" type="text" name="address" value="{{order.get('address')}}" placeholder="" disabled>
+                              </label>
+                            </li>
+                            <!-- TOWN/CITY -->
+                            <li class="col-md-12">
+                              <label>*TOWN/CITY
+                                <input id="town" type="text" name="town" value="{{order.get('town')}}" placeholder="" disabled>
+                              </label>
+                            </li>
+
+
+
+                            <!-- EMAIL ADDRESS -->
+                            <li class="col-md-12">
+                              <label> *EMAIL ADDRESS
+                                <input id="email" type="text" name="contry-state" value="{{order.get('email')}}" placeholder="" disabled>
+                              </label>
+                            </li>
+                            <!-- PHONE -->
+                            <li class="col-md-12">
+                              <label> *PHONE
+                                <input id="phone" type="text" name="postal-code" value="{{order.get('phone')}}" placeholder="" disabled>
+                              </label>
+                            </li>
+                            <li class="col-md-12" id = "selectEx1">
+                      <label> *EXPERIENCE
+                        <select class="selectpicker" style = "font-weight: bold" id = "selectEx" disabled>
+                          <option style = "font-weight: bold" value="online">ONLINE</option>
+                          <option style = "font-weight: bold" value="offline">OFFLINE</option>
+                        </select>
+                      </label>
+                    </li>
+                          </ul>
+                        </form>
+                      </div>
+
+                      <!-- SUB TOTAL -->
+                      <div class="col-sm-5">
+                        <div class="order-place">
+                          <h5>YOUR ORDER</h5>
+                          <div class="order-detail">
+                            <p>PRODUCT <span>TOTAL</span></p>
+                            <div class="item-order">
+                              <p>{{ order.get('product').get('title').get('english') }} <span class="color"> x1 </span></p>
+<!--                              <p>COLOR: BLACK </p>-->
+                              <p class="text-right">{{ order.get('price').get('dollar') }}</p>
+                            </div>
+                            <p>SHIPPING AND HANDLING <span>FREE SHIPPING</span></p>
+                            <p>ORDER TOTAL <span>{{ order.get('price').get('dollar') }}</span></p>
+                          </div>
+<!--                          <div class="pay-meth">-->
+<!--                            <h5>PAYMENT METHODS</h5>-->
+<!--                            <ul>-->
+<!--                              <li>-->
+<!--                                <div class="checkbox">-->
+<!--                                  <input id="checkbox3-1" class="styled" type="checkbox">-->
+<!--                                  <label for="checkbox3-1"> DIRECT BANK TRANSFER </label>-->
+<!--                                </div>-->
+<!--                                <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>-->
+<!--                              </li>-->
+<!--                              <li>-->
+<!--                                <div class="checkbox">-->
+<!--                                  <input id="checkbox3-2" class="styled" type="checkbox">-->
+<!--                                  <label for="checkbox3-2"> CHEQUE PAYMENT </label>-->
+<!--                                </div>-->
+<!--                              </li>-->
+<!--                              <li>-->
+<!--                                <div class="checkbox">-->
+<!--                                  <input id="checkbox3-3" class="styled" type="checkbox">-->
+<!--                                  <label for="checkbox3-3"> PAYPAL </label>-->
+<!--                                </div>-->
+<!--                              </li>-->
+<!--                              <li>-->
+<!--                                <div class="checkbox">-->
+<!--                                  <input id="checkbox3-4" class="styled" type="checkbox">-->
+<!--                                  <label for="checkbox3-4"> I’VE READ AND ACCEPT THE <span class="color"> TERMS &amp; CONDITIONS </span> </label>-->
+<!--                                </div>-->
+<!--                              </li>-->
+<!--                            </ul>-->
+<!--                              {# 问题6 #}-->
+<!--                            <a onclick="ModifyOrder('{{order.id}}')" class="btn btn-small btn-dark pull-right">PLACE ORDER</a> </div>-->
+                          <div id = "oid" style = "display:none">{{order.id}}</div>
+                          <label>
+                            Current Priority: <span id = "pr">{{order.get('priority')}}</span>
+                            <br>
+
+                          </label>
+                          <label>
+                            Modify Priority:
+                          </label>
+                          <ul class="stars">
+      <li class = "star">★</li>
+      <li class = "star">★</li>
+      <li class = "star">★</li>
+      <li class = "star">★</li>
+      <li class = "star">★</li>
+    </ul>
+                                                        <style>.stars{
+      white-space: nowrap;
+    }
+    .stars li{
+      display: inline-block;
+      color: #ADADAD;
+      font-size: 20px;
+    }
+                              </style>
+                              <script>
+                                  let eva_a = true;
+let eva_b = true;
+                                  function add_eva(num){
+                                      oid =  document.getElementById('oid').innerText;
+                                                document.getElementById('pr').innerText = (num).toString();
+      const Order = AV.Object.extend('Order');
+const order = Order.createWithoutData("Order",oid);
+order.set('priority',num);
+order.save();
+
+                                  }
+star();
+
+                                  function star(){
+    //set hover for the star
+        let isClicked = false;
+        let beforeClickedIndex = -1;
+        let Num = 0; //Number of times to click the same star
+        $('.star').hover(
+          function() {
+            if(!isClicked) {
+              $(this).css('color', '#f0d433');
+              let index = $(this).index();
+              for(let i = 0; i <= index; i++) {
+                $('.star:nth-child(' + i + ')').css('color', '#f0d433');
+              }
+            }
+          },
+          function() {
+            if(!isClicked) {
+              $('.star').css('color', '#ADADAD');
+            }
+          }
+        );
+        //Star Click event
+        $('.star').click(function() {
+            if(eva_a){
+                $('.star').css('color', '#ADADAD');
+          isClicked = true;
+          let index = $(this).index();
+          add_eva(index+1);
+
+          for(let i = 1; i <= index+1; i++) {
+            $('.star:nth-child(' + i + ')').css('color', '#f0d433');
+          }
+          if(index == beforeClickedIndex) { //两次点击同一颗星星 该星星颜色变化
+            Num++;
+            if(Num % 2 == 1) {
+              $('.star:nth-child(' + (index + 1) + ')').css('color', '#ADADAD');
+            } else {
+              $('.star:nth-child(' + (index + 1) + ')').css('color', '#f0d433');
+            }
+          } else {
+            Num = 0;
+            beforeClickedIndex = index;
+          }
+          eva_a = false;
+            }else{
+                if(eva_b){
+                    let warning = $('<br>'+'<span>'+'You have already prioritised, please refresh and try again' +'</span>');
+                warning.css('color',"red");
+                $('.stars').append(warning);
+                eva_b = false;
+                }
+
+            }
+
+        });
+
+}
+                              </script>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+</body>
+<script src="../../static/js/sebian_js/wow.min.js"></script>
+<script src="../../static/js/sebian_js/bootstrap.min.js"></script>
+<script src="../../static/js/sebian_js/own-menu.js"></script>
+<script src="../../static/js/sebian_js/main.js"></script>
+<script src="{{ url_for('static',filename='script/jquery.min.js') }}"></script>
+<script src="{{ url_for('static',filename='script/socket.io.js') }}"></script>
+<script src="{{ url_for('static',filename='script/av-min.js') }}"></script>
+<script src="{{ url_for('static',filename='script/user.js') }}"></script>
+<script src="{{ url_for('static',filename='script/order.js') }}"></script>
+<script src="{{ url_for('static',filename='script/orderform.js') }}"></script>
+
+<script>
+
+
+
+</script>
+
+
+</html>

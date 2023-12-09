@@ -1,0 +1,112 @@
+<!--用于用户中心的界面-->
+
+{% extends "MusiCrashTemplates/base_zh.html" %}
+{% block title %}
+用户中心
+{% endblock %}
+
+{% block sebian_css %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+    <section class="testimonial" data-stellar-background-ratio="0.7" style="background-image: url('../../static/image/histroy_view1.jpg'); background-repeat: no-repeat; background-position-x: center; background-position-y: center">
+      <div class="section-p-60px overlay">
+        <div class="container" >
+
+          <!-- Tittle -->
+          <div class="tittle antiquewhite-font animate fadeInUp" data-wow-delay="2s">
+            <h5 id="username"></h5>
+            <p>欢迎您，我们尊贵的客户</p>
+          </div>
+
+          <!-- Slider Section -->
+          <div class="testi-slides animate fadeInUp" data-wow-delay="2s">
+
+            <!-- Slider 1 -->
+            <div class="testi">
+                 <div class="avatar"> <img src="../../static/image/sebian_imgs/avatars/avatar-4.jpg" alt=""> </div>
+<!--              <p>Add your personal statement</p>-->
+              <hr>
+              <h6>欢迎来到缪斯克拉斯</h6>
+              <p id = 'date'></p>
+                            <script>
+                var myDate = new Date();
+                $('#date').text( myDate.toLocaleDateString());
+              </script>
+              <p><u>
+                 <a href="{{ url_for('ch.testinfo') }}" class="antiquewhite-font " ><u><span class="text-decoration-underline">管理您的个人用户信息</span></u></a>
+              </u></p>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--个人信息设置，购物车，个人订单-->
+    <section class="service section-margin dsn-animate"   data-dsn-animate="section">
+        <div class="container section-title">
+          <h2 class="d-inline-block background-transparent background-boarder">您的工具箱</h2>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6 service-content dsn-up">
+              <div class="services-item d-flex p-relative  ">
+                <div class="after-bg p-absolute w-100 h-100 cover-bg antiquewhite" data-image-src="../../static/img/pattern.png"></div>
+                <div class="icon"><img src="../../static/img/services/graph.svg" alt=""></div>
+                <div class="content background-transparent"><span class="theme-color">01</span>
+                  <h4 class="title-block "><a href="javascript:void(0)" onclick="collectionlist()">收藏夹</a></h4>
+                  <p>这里是您收藏过的商品</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 service-content dsn-up">
+              <div class="services-item d-flex p-relative">
+                <div class="after-bg p-absolute w-100 h-100 cover-bg" data-image-src="../../static/img/pattern.png"></div>
+                <div class="icon"><img src="../../static/img/services/layout.svg" alt=""></div>
+                <div class="content background-transparent"><span class="theme-color">02</span>
+                    <h4 class="title-block"><a href="javascript:void(0)" onclick="orderlist()">订单</a></h4>
+                  <p>这里是您购买过的商品</p>
+                </div>
+              </div>
+            </div>
+{#            <div class="col-sm-6 service-content dsn-up">#}
+{#              <div class="services-item d-flex p-relative">#}
+{#                <div class="after-bg p-absolute w-100 h-100 cover-bg" data-image-src="../../static/img/pattern.png"></div>#}
+{#                <div class="icon"><img src="../../static/img/services/idea.svg" alt=""></div>#}
+{#                <div class="content background-transparent"><span class="theme-color">03</span>#}
+{#                  <h4 class="title-block">账户</h4>#}
+{#                  <p>这里您的个人信息</p>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="col-sm-6 service-content dsn-up">#}
+{#              <div class="services-item d-flex p-relative">#}
+{#                <div class="after-bg p-absolute w-100 h-100 cover-bg" data-image-src="../../static/img/pattern.png"></div>#}
+{#                <div class="icon"><img src="../../static/img/services/layout.svg" alt=""></div>#}
+{#                <div class="content background-transparent"><span class="theme-color">04</span>#}
+{#                  <h4 class="title-block">关注</h4>#}
+{#                  <p>这里是您关注过的内容</p>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+          </div>
+        </div>
+      </section>
+
+
+{% endblock %}
+{% block end %}
+    <script>
+
+    console.log("eeee")
+
+    document.getElementById('username').innerText = "你好, " + getLoginState().getUsername();
+
+
+</script>
+{% endblock %}
+{% block sebian_script %}
+{{ super() }}
+{% endblock %}

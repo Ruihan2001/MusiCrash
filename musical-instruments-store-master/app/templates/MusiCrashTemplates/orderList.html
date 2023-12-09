@@ -1,0 +1,324 @@
+<!--用来展示收藏列表的页面-->
+<!--循环部分已经被注释！其结构和第一个div相似，对接后把标注该删除的部分删除-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Historic Orders</title>
+     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon"/>
+  <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon"/>
+    <!-- custom styles(optional) -->
+  <!-- FONTS ONLINE -->
+  <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <!--MAIN STYLE-->
+  <link href="../../static/style/sebian_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../../static/style/sebian_css/main.css" rel="stylesheet" type="text/css">
+  <link href="../../static/style/sebian_css/style.css" rel="stylesheet" type="text/css">
+  <link href="../../static/style/sebian_css/responsive.css" rel="stylesheet" type="text/css">
+  <link href="../../static/style/sebian_css/animate.css" rel="stylesheet" type="text/css">
+  <!-- ADD YOUR OWN STYLING HERE. AVOID TO USE STYLE.CSS AND MAIN.CSS. IT WILL BE HELPFUL FOR YOU IN FUTURE UPDATES -->
+  <link href="../../static/style/sebian_css/custom.css" rel="stylesheet" type="text/css">
+  <script src="../../static/js/sebian_js/jquery-1.11.3.js"></script>
+    <script src="{{ url_for('static',filename='script/socket.io.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/av-min.js') }}"></script>
+    <script type="text/ecmascript-6" src="../static/script/orderlist.js"></script>
+</head>
+<body>
+    <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
+      <div class="container">
+
+        <h4>Your Orders</h4>
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+          <li><a href="javascript:history.back(-1);" >User Center</a></li>
+          <li class="active">Historic Order</li>
+        </ol>
+      </div>
+    </section>
+    <div class="margin-left col-lg-9  animate fadeInUp center-block" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInRight;">
+
+            <!--======= ITEM CETOGRIES =========-->
+            <div class="items-short-type animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+            <!--一下是循环部分-->
+
+
+            <!--======= Products =========-->
+            <div class="popurlar_product list-style animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+              <ul>
+                  <!--循环部分-->
+                  {% for order in order_list %}
+                      <li class="animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                      <div class="items-in">
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <!-- Image -->
+                            <div class="img"> <img src="{{ order.get('product').get('cover').url }}" alt=""> </div>
+                          </div>
+                          <div class="col-sm-8">
+                            <div class="row">
+                                <div class="details-sec col-sm-6"> <a href="#">Price</a><span class="font-montserrat">{{ order.get('price').get('dollar') }} USD</span> </div>
+                                <div class="details-sec col-sm-6"> {{ order.get('createdAt') }}<br><br>order-id: {{ order.id }} </div>
+
+                            </div>
+
+                            <!-- Rating Stars -->
+                            <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+<!--                              这部分是商品名称-->
+                            <p class="details-sec col-sm-6 font-playfair" style = "font-size:20px;font-weight: bold">{{ order.get('product').get('title').english }}</p>
+                            <div class="row">
+                                <div class="details-sec col-sm-6"></div>
+                                <div class="details-sec col-sm-6 font-playfair"> Status: <span id ="{{order.id}}">{{ order.status }}</span></div>
+                            </div>
+                            <div class="row" id = "button">
+                                {% if order.get('status') != 'closed' and order.get('status') != 'received' %}
+                                <a href="{{ url_for('main.ModifyBillInfo', order_id = order.id) }}" class="btn btn-small btn-dark" >Modify</a>
+                                                    {% endif %}
+                                {% if order.get('status') == 'delivering' %}
+                                <a href="#." id  = '{{order.id}}1' class="btn btn-small btn-dark margin-left-4" onclick = "Receive('{{order.id}}')">Receive</a>
+                                {% endif %}
+                                {% if order.get('status') == 'waiting to be delivered' %}
+                                <a href="#." id  = '{{order.id}}2' class="btn btn-small btn-dark margin-left-4" onclick = "Refund('{{order.id}}')">Refund</a>
+                                {% endif %}
+                                {% if order.get('status') == 'processing refund' %}
+                                <a href="#." id  = '{{order.id}}3' class="btn btn-small btn-dark margin-left-4" onclick = "CancelRefund('{{order.id}}')">Cancel Refund</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                      </div>
+                      </div>
+                    </li>
+                  {% endfor %}
+                  <script>
+    AV.init({
+  appId: "pPObpvTV7pQB9poQHO1NJoMP-MdYXbMMI",
+  appKey: "pShwYQQ4JVfSStc56MvkHNrr",
+});
+    function Receive(id){
+    const Order = AV.Object.extend('Order');
+const order = Order.createWithoutData("Order",id);
+order.set('status','received');
+order.set('status_ch','订单已完成')
+order.save();
+document.getElementById(id).innerText = "received";
+document.getElementById(id+'1').style.display = 'none';
+}
+    function Refund(id){
+    const Order = AV.Object.extend('Order');
+const order = Order.createWithoutData("Order",id);
+order.set('status','processing refund');
+order.set('status_ch','退款处理中')
+order.save();
+document.getElementById(id).innerText = "processing refund";
+document.getElementById(id+'2').style.display = 'none';
+}
+    function CancelRefund(id){
+    const Order = AV.Object.extend('Order');
+const order = Order.createWithoutData("Order",id);
+order.set('status','waiting to be delivered');
+order.set('status_ch','等待派送中')
+order.save();
+document.getElementById(id).innerText = "waiting to be delivered";
+document.getElementById(id+'3').style.display = 'none';
+}
+</script>
+<!--                &lt;!&ndash;以下li标签仅作展示作用，对接完成后删除&ndash;&gt;-->
+<!--                &lt;!&ndash; Products List &ndash;&gt;-->
+<!--                <li class="animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">-->
+<!--                  <div class="items-in">-->
+<!--                    <div class="row">-->
+<!--                      <div class="col-sm-4">-->
+<!--                        &lt;!&ndash; Image &ndash;&gt;-->
+<!--                        <div class="img"> <img src="../../static/image/sebian_imgs/new-item-1.jpg" alt=""> </div>-->
+<!--                      </div>-->
+<!--                      <div class="col-sm-8">-->
+<!--                        <div class="row">-->
+<!--                            <div class="details-sec col-sm-6"> <a href="#.">Price</a><span class="font-montserrat">XXX.XX USD</span> </div>-->
+<!--                            <div class="details-sec col-sm-6"> 2022-04-03<br><br>order-id: 2550468999552747417 </div>-->
+
+<!--                        </div>-->
+
+<!--                        &lt;!&ndash; Rating Stars &ndash;&gt;-->
+<!--                        <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>-->
+<!--{#                          这部分是商品名称#}-->
+<!--                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus</p>-->
+<!--                        <div class="row">-->
+<!--                            <div class="details-sec col-sm-6"></div>-->
+<!--                            <div class="details-sec col-sm-6 font-playfair"> Status: Completed</div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            <a href="#." class="btn btn-small btn-dark">More</a>-->
+<!--                            <a href="#." class="btn btn-small btn-dark margin-left-4">Delete</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  </div>-->
+<!--                </li>-->
+
+<!--                &lt;!&ndash; Products List &ndash;&gt;-->
+<!--                <li class="animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">-->
+<!--                  <div class="items-in">-->
+<!--                    <div class="row">-->
+<!--                      <div class="col-sm-4">-->
+<!--                        &lt;!&ndash; Image &ndash;&gt;-->
+<!--                        <div class="img"> <img src="../../static/image/sebian_imgs/new-item-2.jpg" alt=""> </div>-->
+<!--                      </div>-->
+<!--                      <div class="col-sm-8">-->
+<!--                        <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>-->
+<!--                        &lt;!&ndash; Rating Stars &ndash;&gt;-->
+<!--                        <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star-o"></i></div>-->
+<!--                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus</p>-->
+<!--                        <div class="full-width item-btn-com"> <a href="#."><i class="ion-shuffle"></i></a> <a href="#."><i class="fa fa-heart-o"></i></a> </div>-->
+<!--                        <a href="#." class="btn btn-small btn-dark">ADD TO CART</a> </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </li>-->
+
+<!--                &lt;!&ndash; Products List &ndash;&gt;-->
+<!--                <li class="animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">-->
+<!--                  <div class="items-in">-->
+<!--                    <div class="row">-->
+<!--                      <div class="col-sm-4">-->
+<!--                        &lt;!&ndash; Image &ndash;&gt;-->
+<!--                        <div class="img"> <img src="../../static/image/sebian_imgs/new-item-3.jpg" alt=""> </div>-->
+<!--                      </div>-->
+<!--                      <div class="col-sm-8">-->
+<!--                        <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>-->
+<!--                        &lt;!&ndash; Rating Stars &ndash;&gt;-->
+<!--                        <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></div>-->
+<!--                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus</p>-->
+<!--                        <div class="full-width item-btn-com"> <a href="#."><i class="ion-shuffle"></i></a> <a href="#."><i class="fa fa-heart-o"></i></a> </div>-->
+<!--                        <a href="#." class="btn btn-small btn-dark">ADD TO CART</a> </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </li>-->
+
+<!--                &lt;!&ndash; Products List &ndash;&gt;-->
+<!--                <li class="animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">-->
+<!--                  <div class="items-in">-->
+<!--                    <div class="row">-->
+<!--                      <div class="col-sm-4">-->
+<!--                        &lt;!&ndash; Image &ndash;&gt;-->
+<!--                        <div class="img"> <img src="../../static/image/sebian_imgs/new-item-4.jpg" alt=""> </div>-->
+<!--                      </div>-->
+<!--                      <div class="col-sm-8">-->
+<!--                        <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>-->
+<!--                        &lt;!&ndash; Rating Stars &ndash;&gt;-->
+<!--                        <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></div>-->
+<!--                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus</p>-->
+<!--                        <div class="full-width item-btn-com"> <a href="#."><i class="ion-shuffle"></i></a> <a href="#."><i class="fa fa-heart-o"></i></a> </div>-->
+<!--                        <a href="#." class="btn btn-small btn-dark">ADD TO CART</a> </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </li>-->
+
+<!--                &lt;!&ndash; Products List &ndash;&gt;-->
+<!--                <li class="animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">-->
+<!--                  <div class="items-in">-->
+<!--                    <div class="row">-->
+<!--                      <div class="col-sm-4">-->
+<!--                        &lt;!&ndash; Image &ndash;&gt;-->
+<!--                        <div class="img"> <img src="../../static/image/sebian_imgs/new-item-5.jpg" alt=""> </div>-->
+<!--                      </div>-->
+<!--                      <div class="col-sm-8">-->
+<!--                        <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>-->
+<!--                        &lt;!&ndash; Rating Stars &ndash;&gt;-->
+<!--                        <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></div>-->
+<!--                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus</p>-->
+<!--                        <div class="full-width item-btn-com"> <a href="#."><i class="ion-shuffle"></i></a> <a href="#."><i class="fa fa-heart-o"></i></a> </div>-->
+<!--                        <a href="#." class="btn btn-small btn-dark">ADD TO CART</a> </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+
+            <!--======= PAGINATION =========-->
+            <ul class="pagination animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                {% if pagination["has_pre"] %}
+                <li>
+                    <a href="{{ url_for('main.userOrderList', user_id = user_id, page=pagination['pre_page']) }}"><</a>
+                </li>
+                {% endif %}
+                {% if pagination["page"]//8 > 0 %}
+                    {% if pagination["current_page"] > pagination["page"] - 4 %}
+                        <li>
+                            <a href="{{ url_for('main.userOrderList', user_id = user_id, page=1) }}">1</a>
+                        </li>
+                        <li>
+                            <a href="">...</a>
+                        </li>
+                        {% for pagenum in range(pagination["page"]-4,pagination["page"]+1) %}
+                        <li><a {% if pagenum  == pagination["current_page"] %}
+                                class="page_item_active"
+                                {% endif %}
+                                href="{{ url_for('main.userOrderList', user_id = user_id, page=pagenum) }}">{{ pagenum }}</a></li>
+                        {% endfor %}
+
+                    {% elif pagination["current_page"] > 4 %}
+                        <li>
+                            <a href="{{ url_for('main.userOrderList', user_id = user_id, page=1) }}">1</a>
+                        </li>
+                        <li>
+                            <a href="#.">...</a>
+                        </li>
+                        {% for pagenum in range(pagination["current_page"] - 2,pagination["current_page"]+3) %}
+                        <li><a {% if pagenum  == pagination["current_page"] %}
+                                class="page_item_active"
+                                {% endif %}
+                                href="{{ url_for('main.userOrderList', user_id = user_id, page=pagenum) }}">{{ pagenum }}</a></li>
+                        {% endfor %}
+                        <li>
+                            <a href="#.">...</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('main.userOrderList', user_id = user_id, page=pagination['page']) }}">{{ pagination["page"] }}</a>
+                        </li>
+                    {% else %}
+                    {% for pagenum in range(0,5) %}
+                        <li><a {% if pagenum + 1 == pagination["current_page"] %}
+                                class="page_item_active"
+                                {% endif %}
+                                href="{{ url_for('main.userOrderList', user_id = user_id, page=pagenum+1) }}">{{ pagenum + 1 }}</a></li>
+                    {% endfor %}
+                    <li>
+                            <a href="#.">...</a>
+                    </li>
+                    <li>
+                            <a href="{{ url_for('main.userOrderList', user_id = user_id, page=pagination['page']) }}">{{ pagination["page"] }}</a>
+                    </li>
+                    {% endif %}
+                {% else %}
+                    {% for pagenum in range(0, pagination["page"]) %}
+                    <li><a {% if pagenum + 1 == pagination["current_page"] %}
+                            class="page_item_active"
+                            {% endif %}
+                            href="{{ url_for('main.userOrderList', user_id = user_id, page=pagenum+1) }}">{{ pagenum + 1 }}</a></li>
+                {% endfor %}
+                {% endif %}
+                {% if pagination["has_next"] %}
+                <li>
+                    <a href="{{ url_for('main.userOrderList', user_id = user_id, page=pagination['next_page']) }}">></a>
+                </li>
+                {% endif %}
+<!--{#              <li><a href="#.">1</a></li>#}-->
+<!--{#              <li><a href="#.">2</a></li>#}-->
+<!--{#              <li><a href="#.">3</a></li>#}-->
+<!--{#              <li><a href="#.">4</a></li>#}-->
+<!--{#              <li><a href="#.">5</a></li>#}-->
+<!--{#              <li><a href="#."><i class="fa fa-angle-right"></i></a></li>#}-->
+            </ul>
+              </ul>
+          </div>
+
+    </div>
+</body>
+<script src="../../static/js/sebian_js/wow.min.js"></script>
+<script src="../../static/js/sebian_js/bootstrap.min.js"></script>
+<script src="../../static/js/sebian_js/own-menu.js"></script>
+<script src="../../static/js/sebian_js/main.js"></script>
+
+</html>

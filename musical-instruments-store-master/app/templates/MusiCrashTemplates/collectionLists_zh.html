@@ -1,0 +1,156 @@
+<!--用来展示收藏列表的页面-->
+<!--循环部分已经被注释！其结构和第一个div相似，对接后把标注该删除的部分删除-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>您的收藏</title>
+     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon"/>
+  <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon"/>
+    <!-- custom styles(optional) -->
+  <!-- FONTS ONLINE -->
+  <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <!--MAIN STYLE-->
+  <link href="{{ url_for('static',filename='style/sebian_css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static',filename='style/sebian_css/main.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static',filename='style/sebian_css/style.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static',filename='style/sebian_css/responsive.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static',filename='style/sebian_css/animate.css') }}" rel="stylesheet" type="text/css">
+  <!-- ADD YOUR OWN STYLING HERE. AVOID TO USE STYLE.CSS AND MAIN.CSS. IT WILL BE HELPFUL FOR YOU IN FUTURE UPDATES -->
+  <link href="{{ url_for('static',filename='style/sebian_css/custom.css') }}" rel="stylesheet" type="text/css">
+  <script src="{{ url_for('static',filename='js/sebian_js/jquery-1.11.3.js') }}"></script>
+
+</head>
+<body>
+    <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
+      <div class="container">
+        <h4>您的收藏</h4>
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+          <li><a href="javascript:history.back(-1);">用户中心</a></li>
+          <li class="active">收藏</li>
+        </ol>
+      </div>
+    </section>
+    <div class="margin-left col-lg-9  animate fadeInUp center-block" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInRight;">
+
+            <!--======= ITEM CETOGRIES =========-->
+            <div class="items-short-type animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+            <!--一下是循环部分-->
+
+            {% for collection in collections %}
+            {% endfor %}
+            <!--======= Products =========-->
+            <div class="popurlar_product list-style animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+              <ul>
+                  <!--循环部分-->
+                {% for collection in collections %}
+                  {% if collection.get('status')!=False %}
+                <li class="animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                  <div class="items-in">
+                    <div class="row">
+                      <div class="col-sm-4">
+<!--                          {{ collection.get(status)}}-->
+                        <!-- Image -->
+                        <div class="img"> <img src="{{ collection.get('product').get('cover').url }}" alt=""> </div>
+                      </div>
+                      <div class="col-sm-8"> {# 商品价格 #}
+                        <div class="details-sec"> <a href="#.">价格</a> <span class="font-montserrat">{{ collection.get('product').get('price').get('CNY') }} 人民币</span> </div>
+                        <!-- Rating Stars -->
+                          {# 收藏商品名称 #}
+                        <p>{{ collection.get('product').get('title').get('chinese') }}</p>
+                          {# 跳转到收藏商品详情页 #}
+                        <a href="{{ url_for('ch.productInfo', kind_id=collection.get('product'), product_id=collection.get('product').id) }}" class="btn btn-small btn-dark">更多</a>
+<!--                        <a href="#." class="btn btn-small btn-dark margin-left-4">Delete</a></div>-->
+                    </div>
+                  </div>
+                  </div>
+                </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+
+            <!--======= PAGINATION =========-->
+            <ul class="pagination animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                {% if pagination["has_pre"] %}
+                <li>
+                    <a href="{{ url_for('ch.collection', user_id = user_id, page=pagination['pre_page']) }}"><</a>
+                </li>
+                {% endif %}
+                {% if pagination["page"]//8 > 0 %}
+                    {% if pagination["current_page"] > pagination["page"] - 4 %}
+                        <li>
+                            <a href="{{ url_for('ch.collection', user_id = user_id, page=1) }}">1</a>
+                        </li>
+                        <li>
+                            <a href="">...</a>
+                        </li>
+                        {% for pagenum in range(pagination["page"] - 4,pagination["page"]+1) %}
+                        <li><a {% if pagenum  == pagination["current_page"] %}
+                                class="page_item_active"
+                                {% endif %}
+                                href="{{ url_for('ch.collection', user_id = user_id, page=pagenum) }}">{{ pagenum }}</a></li>
+                        {% endfor %}
+
+                    {% elif pagination["current_page"] > 4 %}
+                        <li>
+                            <a href="{{ url_for('ch.collection', user_id = user_id, page=1) }}">1</a>
+                        </li>
+                        <li>
+                            <a href="#.">...</a>
+                        </li>
+                        {% for pagenum in range(pagination["current_page"] - 2,pagination["current_page"]+3) %}
+                        <li><a {% if pagenum  == pagination["current_page"] %}
+                                class="page_item_active"
+                                {% endif %}
+                                href="{{ url_for('ch.collection', user_id = user_id, page=pagenum) }}">{{ pagenum }}</a></li>
+                        {% endfor %}
+                        <li>
+                            <a href="#.">...</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('ch.collection', user_id = user_id, page=pagination['page']) }}">{{ pagination["page"] }}</a>
+                        </li>
+                    {% else %}
+                    {% for pagenum in range(0,5) %}
+                        <li><a {% if pagenum + 1 == pagination["current_page"] %}
+                                class="page_item_active"
+                                {% endif %}
+                                href="{{ url_for('ch.collection', user_id = user_id, page=pagenum + 1) }}">{{ pagenum + 1 }}</a></li>
+                    {% endfor %}
+                    <li>
+                            <a href="#.">...</a>
+                    </li>
+                    <li>
+                            <a href="{{ url_for('ch.collection', user_id = user_id, page=pagination['page']) }}">{{ pagination["page"] }}</a>
+                    </li>
+                    {% endif %}
+                {% else %}
+                    {% for pagenum in range(0, pagination["page"]) %}
+                    <li><a {% if pagenum + 1 == pagination["current_page"] %}
+                            class="page_item_active"
+                            {% endif %}
+                            href="{{ url_for('ch.collection', user_id = user_id, page=pagenum + 1 ) }}">{{ pagenum + 1 }}</a></li>
+                {% endfor %}
+                {% endif %}
+                {% if pagination["has_next"] %}
+                <li>
+                    <a href="{{ url_for('ch.collection', user_id = user_id, page=pagination['next_page']) }}">></a>
+                </li>
+                {% endif %}
+            </ul>
+              </ul>
+          </div>
+    </div>
+</body>
+<script src="{{ url_for('static',filename='js/sebian_js/wow.min.js') }}"></script>
+<script src="{{ url_for('static',filename='js/sebian_js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static',filename='js/sebian_js/own-menu.js') }}"></script>
+<script src="{{ url_for('static',filename='js/sebian_js/main.js') }}"></script>
+
+</html>

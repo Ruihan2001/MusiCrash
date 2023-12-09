@@ -1,0 +1,214 @@
+<!--用于用户中心的界面-->
+
+{% extends "MusiCrashTemplates/base_en.html" %}
+{% block title %}
+User Center
+{% endblock %}
+
+{% block sebian_css %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+    <section class="testimonial" data-stellar-background-ratio="0.7" style="background-image: url('../../static/image/histroy_view1.jpg'); background-repeat: no-repeat; background-position-x: center; background-position-y: center">
+      <div class="section-p-60px overlay">
+        <div class="container">
+
+          <!-- Tittle -->
+          <div class="tittle antiquewhite-font animate fadeInUp" data-wow-delay="2s">
+            <h5 id="username"></h5>
+            <p>Our Happy Clients</p>
+          </div>
+
+          <!-- Slider Section -->
+          <div class="testi-slides animate fadeInUp" data-wow-delay="2s">
+
+            <!-- Slider 1 -->
+            <div class="testi">
+                 <div class="avatar"> <img src="../../static/image/sebian_imgs/avatars/avatar-4.jpg" alt=""> </div>
+<!--              <p>Add your personal statement</p>-->
+              <hr>
+              <h6>Welcome To MusiCrush</h6>
+              <p id = 'date'></p>
+                            <script>
+                var myDate = new Date();
+                $('#date').text( myDate.toLocaleDateString());
+              </script>
+              <p><u>
+                 <a href="{{ url_for('main.testinfo') }}" class="antiquewhite-font " ><u><span class="text-decoration-underline">Manage Your Personal Information</span></u></a>
+              </u></p>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--个人信息设置，购物车，个人订单-->
+    <section class="service section-margin dsn-animate"   data-dsn-animate="section">
+        <div class="container section-title">
+          <h2 class="d-inline-block background-transparent background-boarder">Your Tool Box</h2>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6 service-content dsn-up">
+              <div class="services-item d-flex p-relative  ">
+                <div class="after-bg p-absolute w-100 h-100 cover-bg antiquewhite" data-image-src="../../static/img/pattern.png"></div>
+                <div class="icon"><img src="../../static/img/services/graph.svg" alt=""></div>
+                <div class="content background-transparent"><span class="theme-color">01</span>
+                  <h4 class="title-block "><a href="javascript:void(0)" onclick="collectionlist()">Collections</a></h4>
+                  <p>Here is for what you have collected</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 service-content dsn-up">
+              <div class="services-item d-flex p-relative">
+                <div class="after-bg p-absolute w-100 h-100 cover-bg" data-image-src="../../static/img/pattern.png"></div>
+                <div class="icon"><img src="../../static/img/services/layout.svg" alt=""></div>
+                <div class="content background-transparent"><span class="theme-color">02</span>
+                    <h4 class="title-block"><a href="javascript:void(0)" onclick="orderlist()">Orders</a></h4>
+                  <p>Here is for what you have bought</p>
+                </div>
+              </div>
+            </div>
+<!--            <div class="col-sm-6 service-content dsn-up">-->
+<!--              <div class="services-item d-flex p-relative">-->
+<!--                <div class="after-bg p-absolute w-100 h-100 cover-bg" data-image-src="../../static/img/pattern.png"></div>-->
+<!--                <div class="icon"><img src="../../static/img/services/idea.svg" alt=""></div>-->
+<!--                <div class="content background-transparent"><span class="theme-color">03</span>-->
+<!--                  <h4 class="title-block">Account</h4>-->
+<!--                  <p>Here is for your account information</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-sm-6 service-content dsn-up">-->
+<!--              <div class="services-item d-flex p-relative">-->
+<!--                <div class="after-bg p-absolute w-100 h-100 cover-bg" data-image-src="../../static/img/pattern.png"></div>-->
+<!--                <div class="icon"><img src="../../static/img/services/layout.svg" alt=""></div>-->
+<!--                <div class="content background-transparent"><span class="theme-color">04</span>-->
+<!--                  <h4 class="title-block">Following</h4>-->
+<!--                  <p>Here is the stores your have followed</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+          </div>
+        </div>
+      </section>
+    <!-- 近期购物浏览section-->
+    <section class="work-inner work-masonry p-relative section-margin " style="background-image: url('../../static/image/toolbox_bg.jpg'); background-repeat: no-repeat; background-position-x: center; background-position-y: center">
+{#        <div class="container section-title-2 margin-reduce-20">#}
+{#          <h2>Recent History</h2>#}
+{#          <p>We Remember Your Trace</p>#}
+{#        </div>#}
+{#        <div class="container">#}
+{#          <div class="projects-list p-relative w-100 gallery-portfolio ">#}
+{#            <div class="work-item-box p-relative photography  fashion">#}
+{#              <div class="work-item  p-relative over-hidden"><a href="../../static/image/histroy_view1.jpg">#}
+{#                <div class="img-next-box " data-overlay="5"><img class="cover-bg-img" src="../../static/image/histroy_view1.jpg" alt="" data-dsn-position="85%"></div>#}
+{#                </a>#}
+{#                <div class="item-border p-absolute"></div>#}
+{#                <div class="item-info p-absolute"><a href="../jQuerybootstrapsCyzhmoban/project5.html" data-dsn-grid="move-up" class="effect-ajax" data-dsn-ajax="work">#}
+{#                  <h5 class="cat antiquewhite-font">HH:MM:SS YYYY-MM-DD</h5>#}
+{#                  <h4 class="lightgrey">Product Name</h4>#}
+{#                  <span><span>More</span></span></a></div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="work-item-box p-relative photography  fashion">#}
+{#              <div class="work-item  p-relative over-hidden"><a href="../../static/image/history_view2.jpg">#}
+{#                <div class="img-next-box " data-overlay="5"><img class="cover-bg-img" src="../../static/image/history_view2.jpg" alt="" data-dsn-position="85%"></div>#}
+{#                </a>#}
+{#                <div class="item-border p-absolute"></div>#}
+{#                <div class="item-info p-absolute"><a href="../jQuerybootstrapsCyzhmoban/project5.html" data-dsn-grid="move-up" class="effect-ajax" data-dsn-ajax="work">#}
+{#                  <h5 class="cat antiquewhite-font">HH:MM:SS YYYY-MM-DD</h5>#}
+{#                  <h4 class="lightgrey">Product Name</h4>#}
+{#                  <span><span>More</span></span></a></div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="work-item-box p-relative photography  fashion">#}
+{#              <div class="work-item  p-relative over-hidden"><a href="../../static/image/history_view3.jpg">#}
+{#                <div class="img-next-box " data-overlay="5"><img class="cover-bg-img" src="../../static/image/history_view3.jpg" alt="" data-dsn-position="85%"></div>#}
+{#                </a>#}
+{#                <div class="item-border p-absolute"></div>#}
+{#                <div class="item-info p-absolute"><a href="../jQuerybootstrapsCyzhmoban/project5.html" data-dsn-grid="move-up" class="effect-ajax" data-dsn-ajax="work">#}
+{#                  <h5 class="cat antiquewhite-font">HH:MM:SS YYYY-MM-DD</h5>#}
+{#                  <h4 class="lightgrey">Product Name</h4>#}
+{#                  <span><span>More</span></span></a></div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="work-item-box p-relative photography  fashion">#}
+{#              <div class="work-item  p-relative over-hidden"><a href="../../static/image/history_view4.jpg">#}
+{#                <div class="img-next-box " data-overlay="5"><img class="cover-bg-img" src="../../static/image/history_view4.jpg" alt="" data-dsn-position="85%"></div>#}
+{#                </a>#}
+{#                <div class="item-border p-absolute"></div>#}
+{#                <div class="item-info p-absolute"><a href="../jQuerybootstrapsCyzhmoban/project5.html" data-dsn-grid="move-up" class="effect-ajax" data-dsn-ajax="work">#}
+{#                  <h5 class="cat antiquewhite-font">HH:MM:SS YYYY-MM-DD</h5>#}
+{#                  <h4 class="lightgrey">Product Name</h4>#}
+{#                  <span><span>More</span></span></a></div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="work-item-box p-relative photography  fashion">#}
+{#              <div class="work-item  p-relative over-hidden"><a href="../../static/image/history_view5.jpg">#}
+{#                <div class="img-next-box " data-overlay="5"><img class="cover-bg-img" src="../../static/image/history_view5.jpg" alt="" data-dsn-position="85%"></div>#}
+{#                </a>#}
+{#                <div class="item-border p-absolute"></div>#}
+{#                <div class="item-info p-absolute"><a href="../jQuerybootstrapsCyzhmoban/project5.html" data-dsn-grid="move-up" class="effect-ajax" data-dsn-ajax="work">#}
+{#                  <h5 class="cat antiquewhite-font">HH:MM:SS YYYY-MM-DD</h5>#}
+{#                  <h4 class="lightgrey">Product Name</h4>#}
+{#                  <span><span>More</span></span></a></div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="work-item-box p-relative photography  fashion">#}
+{#              <div class="work-item  p-relative over-hidden"><a href="../../static/image/history_view6.jpg">#}
+{#                <div class="img-next-box " data-overlay="5"><img class="cover-bg-img" src="../../static/image/history_view6.jpg" alt="" data-dsn-position="85%"></div>#}
+{#                </a>#}
+{#                <div class="item-border p-absolute"></div>#}
+{#                <div class="item-info p-absolute"><a href="../jQuerybootstrapsCyzhmoban/project5.html" data-dsn-grid="move-up" class="effect-ajax" data-dsn-ajax="work">#}
+{#                  <h5 class="cat antiquewhite-font">HH:MM:SS YYYY-MM-DD</h5>#}
+{#                  <h4 class="lightgrey">Product Name</h4>#}
+{#                  <span><span>More</span></span></a></div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="work-item-box p-relative photography  fashion">#}
+{#              <div class="work-item  p-relative over-hidden"><a href="../../static/image/histroy_view1.jpg">#}
+{#                <div class="img-next-box " data-overlay="5"><img class="cover-bg-img" src="../../static/image/histroy_view1.jpg" alt="" data-dsn-position="85%"></div>#}
+{#                </a>#}
+{#                <div class="item-border p-absolute"></div>#}
+{#                <div class="item-info p-absolute"><a href="../jQuerybootstrapsCyzhmoban/project5.html" data-dsn-grid="move-up" class="effect-ajax" data-dsn-ajax="work">#}
+{#                  <h5 class="cat antiquewhite-font">HH:MM:SS YYYY-MM-DD</h5>#}
+{#                  <h4 class="lightgrey">Product Name</h4>#}
+{#                  <span><span>More</span></span></a></div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="work-item-box p-relative photography  fashion">#}
+{#              <div class="work-item  p-relative over-hidden"><a href="../../static/image/history_view2.jpg"></a>#}
+{#                <div class="img-next-box " data-overlay="5"><img class="cover-bg-img" src="../../static/image/history_view2.jpg" alt="" data-dsn-position="85%"></div>#}
+{##}
+{#                <div class="item-border p-absolute"></div>#}
+{#                <div class="item-info p-absolute"><a href="../jQuerybootstrapsCyzhmoban/project5.html" data-dsn-grid="move-up" class="effect-ajax" data-dsn-ajax="work">#}
+{#                  <h5 class="cat antiquewhite-font">HH:MM:SS YYYY-MM-DD</h5>#}
+{#                  <h4 class="lightgrey">Product Name</h4>#}
+{#                  <span><span>More</span></span></a></div>#}
+{#              </div>#}
+{#            </div>#}
+{##}
+{#          </div>#}
+{#        </div>#}
+      </section>
+
+{% endblock %}
+{% block end %}
+    <script>
+
+    console.log("eeee")
+
+    document.getElementById('username').innerText = "HELLO, " + getLoginState().getUsername();
+
+
+</script>
+{% endblock %}
+
+{% block sebian_script %}
+{{ super() }}
+
+
+{% endblock %}

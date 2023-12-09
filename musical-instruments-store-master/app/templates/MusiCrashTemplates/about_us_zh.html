@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="discrption" content="parallax one page" />
+<meta name="keyword" content="agency, business, corporate, creative, freelancer, interior, joomla template, K2 Blog, minimal, modern, multipurpose, personal, portfolio, responsive, simple" />
+<!-- Title -->
+<title>缪斯克拉斯-关于我们</title>
+<!-- Font Google -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="../../static/assets/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="../../static/img/logo-dark.png" type="image/x-icon" />
+<!-- custom styles(optional) -->
+<link href="../static/assets/css/plugins.css" rel="stylesheet" type="text/css"/>
+<link href="../static/assets/css/style.css" rel="stylesheet" />
+    <script src="../../static/js/jquery.min.js"></script>
+<script src="../../static/js/plugins.js"></script>
+<script src="../../static/js/dsn-grid.js"></script>
+<script src="../../static/js/custom.js"></script>
+<script src="../../static/js/jquery-3.1.1.min.js"></script>
+<script src="../../static/script/socket.io.js"></script>
+<script src="../../static/script/av-min.js"></script>
+<script src="../../static/script/user.js"></script>
+<script src="../../static/script/traffic.js"></script>
+</head>
+<body class="dsn-effect-scroll dsn-cursor-effect dsn-ajax">
+<div class="preloader">
+  <div class="preloader-bar">
+    <div class="preloader-progress"></div>
+  </div>
+  <h1 class="title v-middle"><span class="percent ">0</span><span class="text-strok">缪斯克拉斯</span><span class="text-fill">缪斯克拉斯</span></h1>
+</div>
+
+<!-- 导航栏 -->
+<div class="site-header">
+  <div class="extend-container d-flex w-100 align-items-baseline justify-content-between align-items-end">
+
+    <!-- 导航栏左边的logo -->
+    <div class="inner-header p-relative">
+      <div class="main-logo"><a href="#" data-dsn="parallax"><img class="dark-logo" src="{{ url_for('static', filename='img/logo-dark.png') }}" alt=""/><img class="light-logo" src="{{ url_for('static', filename='img/logo.png') }}" alt=""/></a></div>
+    </div>
+    <!-- 导航栏左边的logo结束 -->
+
+
+    <!-- 导航栏在其他页面 非当前页面 的效果 -->
+    <div class="menu-icon d-flex align-items-baseline">
+      <div class="text-menu p-relative  font-heading text-transform-upper">
+        <div class="p-absolute text-button">菜单</div>
+        <div class="p-absolute text-open">打开</div>
+        <div class="p-absolute text-close">关闭</div>
+      </div>
+      <div class="icon-m " data-dsn="parallax"><span class="menu-icon-line p-relative d-inline-block icon-top"></span><span class="menu-icon-line p-relative d-inline-block icon-center"></span><span class="menu-icon-line p-relative d-block icon-bottom"></span></div>
+    </div>
+    <!-- 导航栏在其他页面的效果结束 -->
+
+    <!-- 导航栏右边的内容 -->
+    <nav class="accent-menu main-navigation p-absolute  w-100  d-flex align-items-baseline ">
+      <!-- 不知道这行干嘛用的 -->
+      <div class="menu-cover-title">菜单</div>
+
+      <!-- 导航栏右边的内容的ul -->
+      <ul class="extend-container p-relative d-flex flex-column justify-content-center h-100">
+
+        <!-- li 1: Home -->
+        <li class="dsn-active dsn-drop-down"><a href="#" class="user-no-selection"><span class="dsn-title-menu">主页</span><span class="dsn-meta-menu">01</span><span class="dsn-bg-arrow"></span></a>
+          <ul>
+            <li class="dsn-back-menu"><img src="{{ url_for('static', filename='img/left-chevron.svg') }}" alt=""><span class="dsn-title-menu">首页</span></li>
+            <li><a href="{{ url_for('ch.index') }}"><span class="dsn-title-menu">索引</span><span class="dsn-meta-menu">01</span></a></li>
+            <li><a href="{{ url_for('ch.aboutus') }}"><span class="dsn-title-menu">关于我们</span><span class="dsn-meta-menu">02</span></a></li>
+          </ul>
+        </li>
+        <!-- li 2: Sliders -->
+        <li class="dsn-drop-down"><a href="#" class="user-no-selection"><span class="dsn-title-menu">商品</span><span class="dsn-meta-menu">02</span><span class="dsn-bg-arrow"></span></a>
+          <ul>
+            <li class="dsn-back-menu"><img src="{{ url_for('static', filename='img/left-chevron.svg') }}" alt=""><span class="dsn-title-menu">商品</span></li>
+            <li><a href="{{ url_for('ch.category') }}"><span class="dsn-title-menu">品牌</span><span class="dsn-meta-menu">01</span></a></li>
+          </ul>
+        </li>
+        <!-- li 3: Setting -->
+        <li class="dsn-drop-down"><a href="#" class="user-no-selection"><span id="logoutb" class="dsn-title-menu">设置</span><span class="dsn-meta-menu">03</span><span class="dsn-bg-arrow"></span></a>
+          <ul id="user-operation">
+            <li class="dsn-back-menu"><img src="{{ url_for('static', filename='img/left-chevron.svg') }}" alt=""><span class="dsn-title-menu">设置</span></li>
+          </ul>
+        </li>
+      </ul>
+
+
+      <!-- 导航栏在其他页面 非当前页面 的效果 -->
+      <div class="container-content  d-flex flex-column justify-content-end">
+
+        <!-- Studio和Contact -->
+        <div class="nav__info">
+          <!-- Studio -->
+          <div class="nav-content">
+            <p class="title-line">研究</p>
+            <p>26-30 新塞得港<br>
+              El-Mahalla El-Kubra,SK1 66LM</p>
+          </div>
+          <!-- Contact -->
+          <div class="nav-content">
+            <p class="title-line">联系</p>
+            <p class="links over-hidden"><a href="#" data-hover-text="+00 (2)012 3321" class="link-hover">+00(2)012 3321</a></p>
+            <p class="links  over-hidden"><a href="#" data-hover-text="info@dsngrid.com" class="link-hover">info@dsngrid.com</a></p>
+          </div>
+        </div>
+
+        <!-- Follow US -->
+        <div class="nav-social">
+          <div class="nav-social-inner p-relative">
+            <p class="title-line">关注我们</p>
+            <ul>
+              <li><a href="#" target="_blank" rel="nofollow">追波
+                <div class="icon-circle"></div>
+                </a></li>
+              <li><a href="#" target="_blank" rel="nofollow">彼行司
+                <div class="icon-circle"></div>
+                </a></li>
+              <li><a href="#" target="_blank" rel="nofollow">领英
+                <div class="icon-circle"></div>
+                </a></li>
+              <li><a href="#" target="_blank" rel="nofollow">推特
+                <div class="icon-circle"></div>
+                </a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <!-- 导航栏在其他页面的效果结束 -->
+
+      <!-- 导航栏右边的内容的鼠标悬停下划线效果 -->
+      <div class="nav-border-bottom"></div>
+
+    </nav>
+    <!-- 导航栏右边的内容结束 -->
+
+  </div>
+</div>
+<!-- 导航栏结束 -->
+
+<main class="main-root">
+  <div id="dsn-scrollbar">
+    <header>
+      <div class="header-page background-section">
+        <div class="container h-100">
+          <div class="contenet-hero p-relative">
+            <h2 class="title-page p-relative">关于我们</h2>
+            <h1 class="title">缪斯克拉斯</h1>
+            <p class="subtitle-page">
+                我们始终认为，通过长期积累的技术、经验和吸引力，我们能够热情迎接挑战，为用户创造“感动”。为此，我们真诚地面对每一位客户，珍惜用户的宝贵意见。
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="wrapper">
+      <div class="image-head p-relative mb-section">
+        <div class="bg-section p-absolute w-100 h-100 over-hidden">
+          <div class="h-100 before-z-index" data-dsn-grid="move-up" data-overlay="5"><img class="cover-bg-img has-top-bottom" src="../static/assets/img/about/5.jpg" alt=""></div>
+        </div>
+        <div class="box-text margin-lr-100 p-relative background-theme section-padding">
+          <h5>我们开发、维护和优化</h5>
+          <h4>新时代<br>
+            Welectronic平台</h4>
+          <div class="shap-section"><img src="../static/assets/img/arr.svg" alt=""></div>
+        </div>
+      </div>
+      <div class="hero-about section-margin">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-5 heading">
+              <h2 class="title-h2">做重要的事情。</h2>
+            </div>
+            <div class="col-lg-7 intro-about">
+              <h5 class="sm-title-block">一个充满激情的团队，在发布新的数字产品时有明确的目标。无论是渠道还是设备，我们都想让我们的客户普遍存在。</h5>
+              <p class="p-larg">我们创造人们喜爱的数字体验和品牌。当我听到麦穗间嗡嗡作响的小世界，渐渐熟悉了无数不可名状的东西。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="services-about section-margin">
+        <div class="container services-wp">
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="box-title-services">
+                <ul>
+                  <li id="tabs-1" class="link-click active title-block">设计</li>
+                  <li id="tabs-3" class="link-click title-block">开发</li>
+                  <li id="tabs-4" class="link-click title-block">支持</li>
+<!--                  <li id="tabs-5" class="link-click title-block">marketing.</li>-->
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <div class="content">
+                <div id="tabs-1-content" class="services-item-info">
+                  <h5>专业知识</h5>
+                  <h4 class="title-block">消费品及服务</h4>
+                  <p class="p-larg"> 我们在进行每一步创新的同时，对本地用户体验做出数据驱动的决策。从移动设备到平板电脑到桌面设备，我们的数字创作旨在对任何尺寸的屏幕产生影响。</p>
+                  <ul>
+                    <li>艺术方向</li>
+                    <li>用户体验</li>
+                    <li>用户接口</li>
+                    <li>网页设计</li>
+                  </ul>
+                </div>
+                <div id="tabs-3-content" class="services-item-info">
+                  <h5>专业知识</h5>
+                  <h4 class="title-block">开发</h4>
+                  <p class="p-larg"> 我们的员工拥有丰富的钢琴销售经验。他们可以向你展示你从未想过的更全面的音乐世界和艺术形式。我们的工程师是艺术家——他们可以为设计注入活力，让网站以一种你从未想过的方式运行。
+
+</p>
+                  <ul>
+                    <li>电子商务</li>
+                    <li>电商服务平台</li>
+                    <li>维护</li>
+                  </ul>
+                </div>
+                <div id="tabs-4-content" class="services-item-info">
+                  <h5>E专业知识</h5>
+                  <h4 class="title-block">支持</h4>
+                  <p class="p-larg">我们是来帮你的。有任何需要，随时联系我们。持续的技术支持是协议的一部分，所以你可以专注于你梦想中的钢琴，没有烦恼。 </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="team section-margin">
+        <div class="container section-title">
+          <h2>OUR TEAM Membera</h2>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 col-sm-6 team-item-inner">
+              <div class="team-item p-relative">
+                <div class="box-img"> <img src="../static/img/team/shihuilin.jpg" alt="" class="cover-bg-img p-absolute"> </div>
+<!--                <div class="box-social">-->
+<!--                  <ul data-dsn-cutter="html">-->
+<!--                    <li data-dsn="parallax"> <a class="c-hidden" href="#"><i class="fab fa-facebook-f"></i> </a> </li>-->
+<!--                    <li data-dsn="parallax"> <a class="c-hidden" href="#"><i class="fab fa-twitter"></i></a> </li>-->
+<!--                    <li data-dsn="parallax"><a class="c-hidden" href="#"><i-->
+<!--                                                        class="fab fa-linkedin-in"></i></a> </li>-->
+<!--                  </ul>-->
+<!--                </div>-->
+                <div class="text-box p-relative">
+                  <h5>店铺管理员</h5>
+                  <h3 class="title-block">施慧琳</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 team-item-inner">
+              <div class="team-item p-relative">
+                <div class="box-img"> <img src="../static/img/team/lvjunyi.jpg" alt="" class="cover-bg-img p-absolute"> </div>
+<!--                <div class="box-social">-->
+<!--                  <ul data-dsn-cutter="html">-->
+<!--                    <li data-dsn="parallax"> <a class="c-hidden" href="#"><i class="fab fa-facebook-f"></i> </a> </li>-->
+<!--                    <li data-dsn="parallax"> <a class="c-hidden" href="#"><i class="fab fa-twitter"></i></a> </li>-->
+<!--                    <li data-dsn="parallax"><a class="c-hidden" href="#"><i-->
+<!--                                                        class="fab fa-linkedin-in"></i></a> </li>-->
+<!--                  </ul>-->
+<!--                </div>-->
+                <div class="text-box p-relative">
+                  <h5>品牌咨询师</h5>
+                  <h3 class="title-block">吕俊逸</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 team-item-inner">
+              <div class="team-item p-relative">
+                <div class="box-img"> <img src="../static/img/team/youweijiong.jpg" alt="" class="cover-bg-img p-absolute"> </div>
+<!--                <div class="box-social">-->
+<!--                  <ul data-dsn-cutter="html">-->
+<!--                    <li data-dsn="parallax"> <a class="c-hidden" href="#"><i class="fab fa-facebook-f"></i> </a> </li>-->
+<!--                    <li data-dsn="parallax"> <a class="c-hidden" href="#"><i class="fab fa-twitter"></i></a> </li>-->
+<!--                    <li data-dsn="parallax"><a class="c-hidden" href="#"><i-->
+<!--                                                        class="fab fa-linkedin-in"></i></a> </li>-->
+<!--                  </ul>-->
+<!--                </div>-->
+                <div class="text-box p-relative">
+                  <h5>客户服务</h5>
+                  <h3 class="title-block">游维炯</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 team-item-inner">
+              <div class="team-item p-relative">
+                <div class="box-img"> <img src="../static/img/team/gaoruihan.jpg" alt="" class="cover-bg-img p-absolute"> </div>
+<!--                <div class="box-social">-->
+<!--&lt;!&ndash;                  <ul data-dsn-cutter="html">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <li data-dsn="parallax"> <a class="c-hidden" href="#"><i class="fab fa-facebook-f"></i> </a> </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <li data-dsn="parallax"> <a class="c-hidden" href="#"><i class="fab fa-twitter"></i></a> </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <li data-dsn="parallax"><a class="c-hidden" href="#"><i&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        class="fab fa-linkedin-in"></i></a> </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </ul>&ndash;&gt;-->
+<!--                </div>-->
+                <div class="text-box p-relative">
+                  <h5>客户服务</h5>
+                  <h3 class="title-block">高睿晗</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 team-item-inner">
+              <div class="team-item p-relative">
+                <div class="box-img"> <img src="../static/img/team/liuwenrui.jpg" alt="" class="cover-bg-img p-absolute"> </div>
+<!--                <div class="box-social">-->
+<!--                  <ul data-dsn-cutter="html">-->
+<!--                    <li data-dsn="parallax"> <a class="c-hidden" href="#"><i class="fab fa-facebook-f"></i> </a> </li>-->
+<!--                    <li data-dsn="parallax"> <a class="c-hidden" href="#"><i class="fab fa-twitter"></i></a> </li>-->
+<!--                    <li data-dsn="parallax"><a class="c-hidden" href="#"><i-->
+<!--                                                        class="fab fa-linkedin-in"></i></a> </li>-->
+<!--                  </ul>-->
+<!--                </div>-->
+                <div class="text-box p-relative">
+                  <h5>技术顾问</h5>
+                  <h3 class="title-block">刘文睿</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 team-item-inner">
+              <div class="team-item p-relative">
+                <div class="box-img"> <img src="../static/img/team/jinshenyuan.jpg" alt="" class="cover-bg-img p-absolute"> </div>
+<!--                <div class="box-social">-->
+<!--                  <ul data-dsn-cutter="html">-->
+<!--                    <li data-dsn="parallax"> <a class="c-hidden" href="#"><i class="fab fa-facebook-f"></i> </a> </li>-->
+<!--                    <li data-dsn="parallax"> <a class="c-hidden" href="#"><i class="fab fa-twitter"></i></a> </li>-->
+<!--                    <li data-dsn="parallax"><a class="c-hidden" href="#"><i-->
+<!--                                                        class="fab fa-linkedin-in"></i></a> </li>-->
+<!--                  </ul>-->
+<!--                </div>-->
+                <div class="text-box p-relative">
+                  <h5>运维管理</h5>
+                  <h3 class="title-block">金深远</h3>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+      <section class="testimonials-2 testimonials-3 section-margin">
+        <div class="container section-title">
+          <h2>顾客留言</h2>
+        </div>
+        <div class="container h-100">
+          <div class="row align-items-center h-100">
+            <div class="col-lg-3 col-md-4">
+              <div class="nav-container">
+                <div class="testimonials-nav">
+                  <div class="testimonials-nav-item">
+                    <div class="testimonials-nav-item-inner"> <img src="../static/assets/img/avatar/1.jpg" alt="">
+                      <div class="info">
+                        <h5>Vikinglivet</h5>
+                        <h6>顾客 A</h6>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="testimonials-nav-item">
+                    <div class="testimonials-nav-item-inner"> <img src="../static/assets/img/avatar/2.jpg" alt="">
+                      <div class="info">
+                        <h5>Muhammad Khedr</h5>
+                        <h6>顾客 B</h6>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="testimonials-nav-item">
+                    <div class="testimonials-nav-item-inner"> <img src="../static/assets/img/avatar/3.jpg" alt="">
+                      <div class="info">
+                        <h5>Caeleth</h5>
+                        <h6>顾客 C</h6>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="testimonials-nav-item">
+                    <div class="testimonials-nav-item-inner"> <img src="../static/assets/img/avatar/4.jpg" alt="">
+                      <div class="info">
+                        <h5>w0anerges</h5>
+                        <h6>顾客 D</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-9 col-md-8">
+              <div class="testimonials-main-content dsn-is-not-fade">
+                <div class="testimonials-item">
+                  <div class="top-box">
+                    <h4 class="title-block">品质</h4>
+                    <p class="p-larg">网页的布局和功能设计令人惊叹。我可以感觉到我在一个大钢琴店浏览，同时可以得到任何一架钢琴的细节。</p>
+                  </div>
+                </div>
+                <div class="testimonials-item">
+                  <div class="top-box">
+                    <h4 class="title-block">质量</h4>
+                    <p class="p-larg">功能设计非常丰富。在这里，我甚至可以体验触摸钢琴的感觉。</p>
+                  </div>
+                </div>
+                <div class="testimonials-item">
+                  <div class="top-box">
+                    <h4 class="title-block">客服</h4>
+                    <p class="p-larg">我得到了无与伦比的支持。当我需要更多信息时，客服可以快速回复我并接受我的咨询。</p>
+                  </div>
+                </div>
+                <div class="testimonials-item">
+                  <div class="top-box">
+                    <h4 class="title-block">用户支持</h4>
+                    <p class="p-larg">用户信息管理非常好。我可以很容易地管理我的订单和收集的物品。Musicrash让它看起来既高效又漂亮。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="brand-client section-margin">
+        <div class="container section-title">
+          <h2>您的成功,<br>
+            我们的荣幸</h2>
+        </div>
+        <div class="container">
+        </div>
+      </section>
+    </div>
+
+    <footer class="footer-1 p-relative background-section">
+      <div class="container">
+        <div class="footer-links p-relative">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 footer-block-inner">
+              <div class="footer-block">
+                <div class="footer-logo"> <a href="#"> <img src="{{ url_for('static', filename='img/logo.png') }}" alt="" class="logo-dark"> <img src="{{ url_for('static', filename='img/logo-dark.png') }}" alt="" class="logo-light"> </a> </div>
+                <div class="textwidget">
+                  <p>我们支持为员工创造晋升机会的项目。</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 footer-block-inner">
+              <div class="footer-block col-menu">
+                <h4 class="footer-title">关注我们</h4>
+                <div class="footer-social p-relative">
+                  <ul>
+                    <li class="over-hidden"> <a href="#" data-dsn="parallax" target="_blank"
+                                               rel="nofollow">Dribbble.</a> </li>
+                    <li class="over-hidden"> <a href="#" data-dsn="parallax" target="_blank"
+                                               rel="nofollow">Behance.</a> </li>
+                    <li class="over-hidden"> <a href="#" data-dsn="parallax" target="_blank"
+                                               rel="nofollow">Twitter.</a> </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 footer-block-inner">
+              <div class="footer-block col-contact">
+                <h4 class="footer-title">Contact</h4>
+                <p><strong>T</strong> <span>:</span> +001 225 3351</p>
+                <p><strong>F</strong> <span>:</span>+001 225 3351</p>
+                <p class="over-hidden"><strong>E</strong> <span>:</span><a class="link-hover"
+                                                                                           data-hover-text="缪斯克拉斯1974@gmail.com"
+                                                                                           href="#">缪斯克拉斯1974@gmail.com</a> </p>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 footer-block-inner">
+              <div class="col-address">
+                <h4 class="footer-title">地址</h4>
+                <p>El-Mahalla El-Kubra 37<br>
+                  1776 Damietta<br>
+                  Egypt</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 上面是新加的footer头部 -->
+      <div class="footer-nav">
+        <div class="container">
+          <ul>
+            <li><a class="link-hover" data-dsn="parallax" href="#">主页</a></li>
+            <li><a class="link-hover" data-dsn="parallax" href="#">投资组合</a></li>
+            <li><a class="link-hover" data-dsn="parallax" href="#">关于</a></li>
+            <li><a class="link-hover" data-dsn="parallax" href="#">新闻</a></li>
+            <li><a class="link-hover" data-dsn="parallax" href="#">咨询</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <div class="text-center">
+          <p>© 2022 缪斯克拉斯</p>
+          <div class="copright-text over-hidden">设计<a class="link-hover"
+                                                                          data-hover-text="缪斯克拉斯" href="{{ url_for('ch.index') }}"
+                                                                          target="_blank">缪斯克拉斯</a> </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</main>
+<!-- Optional JavaScript --><script src="../static/assets/js/jquery-3.1.1.min.js"></script><script src="../static/assets/js/plugins.js"></script><script src="../static/assets/js/dsn-grid.js"></script><script src="../static/assets/js/custom.js"></script>
+</body>
+</html>

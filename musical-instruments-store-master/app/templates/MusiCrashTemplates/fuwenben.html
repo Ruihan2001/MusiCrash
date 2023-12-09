@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+<!-- 引入 js -->
+            <script src="{{ url_for('static',filename='script/jquery.min.js') }}"></script>
+<script src="../../static/script/wangEditor_revise.min.js"></script>
+        <script src="{{ url_for('static',filename='script/socket.io.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/av-min.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/user.js') }}"></script>
+     <script src="{{ url_for('static',filename='js/product.js') }}"></script>
+
+</head>
+<label>
+    product id:
+    <input type="text" id="id">
+</label>
+<button onclick="let user=getLoginState();
+   result= document.getElementById('result');
+if(user){
+    result.innerText='login already, current user is '+user.getUsername();
+}else{
+    result.innerText='not already login';
+}
+">check state</button>
+<p id="result"></p>
+
+<body style="height: 100%">
+<div style="height: 100%">
+<div id='left' style="float: left;width: 50%;height: 100%">
+    <div id="editor" style="margin: 20px"></div>
+    <span>
+        <button>
+            clear
+        </button>
+        <button onclick="createProduct(editor.txt.html())">
+            summon
+        </button>
+    </span>
+</div>
+<div id='right' style="float: right;width: 50%"></div>
+</div>
+</body>
+{#<script>#}
+{#    const E = window.wangEditor;#}
+{#    const editor = new E('#editor');#}
+{#    editor.config.uploadImgServer = 'https://ppobpvtv.api.lncldglobal.com/1.1/functions/upload_img'#}
+{#    editor.config.uploadImgHeaders = {#}
+{#        'x-lc-id': 'pPObpvTV7pQB9poQHO1NJoMP-MdYXbMMI','x-lc-sign': '87d28a0e718a4ea4846b00ea2a53bdb4,1647415050912'#}
+{#    }#}
+{#    editor.create();#}
+{#</script>#}
+<script>
+
+
+    // resultFiles 是 input 中选中的文件列表
+    // insertImgFn 是获取图片 url 后，插入到编辑器的方法
+
+    AV.init({
+  appId: "pPObpvTV7pQB9poQHO1NJoMP-MdYXbMMI",
+  appKey: "pShwYQQ4JVfSStc56MvkHNrr",
+});
+
+    const E = window.wangEditor;
+    const editor = new E('#editor');
+    editor.config.customUploadImg = function (resultFiles, insertImgFn) {
+        const file = new AV.File(resultFiles[0].name, resultFiles[0]);
+        file.save().then((file) => {
+          insertImgFn(file.get("url"))
+        }, (error) => {
+        });
+    };
+    editor.create();
+</script>
+</html>

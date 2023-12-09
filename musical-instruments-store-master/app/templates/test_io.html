@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{{ url_for('static',filename='script/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/socket.io.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/av-min.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/user.js') }}"></script>
+    <script>
+        var socket=io()
+        socket.on('id',function (data) {
+            console.log("join success")
+            console.log(data)
+        })
+
+        socket.on('notify',function(data){
+            console.log("other join")
+        })
+
+        $(document).ready(function () {
+            $("#join").click(function () {
+                console.log("click")
+                socket.emit("join")
+                {#testConnect()#}
+            })
+        })
+    </script>
+</head>
+<body>
+    <button id="join" class="join">join</button>
+
+</body>
+</html>

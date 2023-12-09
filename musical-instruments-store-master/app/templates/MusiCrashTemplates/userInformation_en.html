@@ -1,0 +1,66 @@
+<!--用于展示用户详细的个人页面-->
+{% extends "MusiCrashTemplates/base_en.html"%}
+{% block title %}
+Information of Your
+{% endblock %}
+
+{% block sebian_css %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+    <section class="testimonial" data-stellar-background-ratio="0.7" style="background-image: url('../../static/image/histroy_view1.jpg'); background-repeat: no-repeat; background-position-x: center; background-position-y: center">
+      <div class="section-p-60px overlay">
+        <div class="container">
+
+          <!-- Tittle -->
+          <div class="tittle antiquewhite-font animate fadeInUp" data-wow-delay="2s" >
+            <h5 id="username"></h5>
+            <p>Our Happy Clients</p>
+          </div>
+
+          <!-- Slider Section -->
+          <div class="testi-slides animate fadeInUp" data-wow-delay="2s" >
+
+            <!-- Slider 1 -->
+            <div class="testi">
+              <div class="avatar"> <img src="../../static/image/sebian_imgs/avatars/avatar-4.jpg" alt=""> </div>
+              <p>Personal Information</p>
+              <hr> {# 问题1 #}
+              <h6>User Name</h6>
+              <p id="username2"></p>
+              <h6>Phone</h6>
+              <p id="phone"></p>
+              <h6>Email</h6>
+              <p id="mail"></p>
+              <h6>Address</h6>
+              <p>Beijiing, Chao yang district，Nan Mo Fang town, Pingleyuan No.100</p>
+              <p><u>
+                 <a href="{{ url_for('main.testmodify') }}" class="antiquewhite-font " ><u><span class="text-decoration-underline">Manage Your Personal Information</span></u></a>
+              </u></p>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}
+{% block end %}
+    <script>
+
+    console.log("eeee")
+    document.getElementById('username').innerText = "HELLO, " + getLoginState().getUsername();
+    document.getElementById('username2').innerText = getLoginState().getUsername();
+    document.getElementById('mail').innerText = getLoginState().get('email')
+    document.getElementById('phone').innerText = getLoginState().get('mobilePhoneNumber')
+
+
+</script>
+{% endblock %}
+
+
+{% block sebian_script %}
+{{ super() }}
+{% endblock %}

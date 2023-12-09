@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{{ url_for('static',filename='script/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/socket.io.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/av-min.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/user.js') }}"></script>
+
+</head>
+<body>
+<label>
+    username:
+    <input type="text" id="username">
+</label>
+<label>
+    password:
+    <input type="password" id="password">
+</label>
+<label>
+    email:
+    <input type="email" id="email">
+</label>
+<label>
+    phone:
+    <input type="text" id="phone">
+</label>
+<hr>
+<button onclick="
+  signInWithUsername($('#username').val(),$('#password').val(),function(user) {
+    document.getElementById('result').innerText='login success!'
+    console.log(user)
+  },function(error) {
+    document.getElementById('result').innerText=error
+    console.log(error)
+  })
+">login</button>
+
+<button onclick="signUp($('#username').val(),null,null,$('#password').val(),function(user) {
+  document.getElementById('result').innerText='register success!'
+  console.log(user)
+},function(error) {
+  document.getElementById('result').innerText=error
+  console.log(error)
+})">register</button>
+
+<button onclick="logout();">logout</button>
+
+<button onclick="let user=getLoginState();
+   result= document.getElementById('result');
+if(user){
+    result.innerText='login already, current user is '+user.getUsername();
+}else{
+    result.innerText='not already login';
+}
+">check state</button>
+
+<button onclick="changeInfo($('#username').val(),$('#phone').val(),$('#email').val());">submit</button>
+
+<button onclick="reset($('#email').val())">Reset Password</button>
+
+<button onclick="document.getElementById('result').innerText=AV.User.current().getSessionToken()">get token</button>
+
+<button onclick="AV.Cloud.run('test').then(function (data) {
+  // 处理结果
+  document.getElementById('result').innerText=data
+}, function (err) {
+  // 处理报错
+  document.getElementById('result').innerText=err
+});">Test cloud</button>
+
+<button onclick="
+      $.ajax({
+  type: 'POST',
+  url: 'https://ppobpvtv.api.lncldglobal.com/1.1/functions/test',
+  headers: {'x-lc-id': 'pPObpvTV7pQB9poQHO1NJoMP-MdYXbMMI','x-lc-session': 'nwbqp58uv74xjjxmmkcplvfrp','x-lc-sign': '87d28a0e718a4ea4846b00ea2a53bdb4,1647415050912'},
+    success:function(data) {
+      document.getElementById('result').innerText=data
+      console.log(data)
+    }
+});
+">ajax</button>
+<button onclick="checkIsOperation().then(res=>{
+    document.getElementById('result').innerText= res
+})">checkOperation</button>
+<hr>
+
+<p id="result"></p>
+
+
+</body>
+</html>

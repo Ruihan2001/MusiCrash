@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>完成表单详情</title>
+     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon"/>
+  <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon"/>
+    <!-- custom styles(optional) -->
+  <!-- FONTS ONLINE -->
+  <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <!--MAIN STYLE-->
+  <link href="../../static/style/sebian_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../../static/style/sebian_css/main.css" rel="stylesheet" type="text/css">
+  <link href="../../static/style/sebian_css/style.css" rel="stylesheet" type="text/css">
+  <link href="../../static/style/sebian_css/responsive.css" rel="stylesheet" type="text/css">
+  <link href="../../static/style/sebian_css/animate.css" rel="stylesheet" type="text/css">
+  <!-- ADD YOUR OWN STYLING HERE. AVOID TO USE STYLE.CSS AND MAIN.CSS. IT WILL BE HELPFUL FOR YOU IN FUTURE UPDATES -->
+  <link href="../../static/style/sebian_css/custom.css" rel="stylesheet" type="text/css">
+  <script src="../../static/js/sebian_js/jquery-1.11.3.js"></script>
+
+
+</head>
+<body>
+<div id="wrap">
+    <div class="content">
+        <section class="sub-banner">
+          <div class="container">
+            <h4>完成表单详情</h4>
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                {# 问题2 #}
+              <li><a href="javascript:history.back()">返回</a></li>
+            </ol>
+          </div>
+        </section>
+        <section class="section-p-30px pages-in chart-page">
+            <div class="container">
+                <div class="shopping-cart">
+
+                  <!-- SHOPPING INFORMATION -->
+                  <div class="cart-ship-info">
+                    <div class="row">
+
+                      <!-- ESTIMATE SHIPPING & TAX -->
+                      <div class="col-sm-7">
+                        <h6>订单详情</h6>
+                        <form>
+                          <ul class="row">
+
+                            <!-- *COUNTRY -->
+                            <!-- Name -->
+                            <li class="col-md-6">
+                              <label> *名
+                                <input id="name" type="text" name="first-name" value="" placeholder="">
+                              </label>
+                            </li>
+                            <!-- LAST NAME -->
+                            <li class="col-md-6">
+                              <label> *姓
+                                <input type="text" name="last-name" value="" placeholder="">
+                              </label>
+                            </li>
+
+                            <li class="col-md-12">
+                              <!-- ADDRESS -->
+                              <label>*地址
+                                <input id="address" type="text" name="address" value="" placeholder="">
+                              </label>
+                            </li>
+                            <!-- TOWN/CITY -->
+                            <li class="col-md-12">
+                              <label>*城市
+                                <input id="town" type="text" name="town" value="" placeholder="">
+                              </label>
+                            </li>
+
+
+
+                            <!-- EMAIL ADDRESS -->
+                            <li class="col-md-12">
+                              <label> *电子邮箱
+                                <input id="email" type="text" name="contry-state" value="" placeholder="">
+                              </label>
+                            </li>
+                            <!-- PHONE -->
+                            <li class="col-md-12">
+                              <label> *手机
+                                <input id="phone" type="text" name="postal-code" value="" placeholder="">
+                              </label>
+                            </li>
+                            <li class="col-md-12" id = "selectEx1">
+                      <label> *取货方式
+                        <select class="selectpicker" style = "font-weight: bold" id = "selectEx">
+                          <option style = "font-weight: bold" value="online">线上</option>
+                          <option style = "font-weight: bold" value="offline">线下</option>
+                        </select>
+                      </label>
+                    </li>
+                          </ul>
+                        </form>
+                      </div>
+
+                      <!-- SUB TOTAL -->
+                      <div class="col-sm-5">
+                        <div class="order-place">
+                          <h5>您的订单</h5>
+                          <div class="order-detail">
+                            <p>商品 <span>总计</span></p>
+                            <div class="item-order">
+                              <p>{{ piano.get('title').get('english') }} <span class="color"> x1 </span></p>
+<!--                              <p>COLOR: BLACK </p>-->
+                              <p class="text-right">{{ piano.get('price').get('dollar') }}</p>
+                            </div>
+                            <p>运输和处理 <span>免费送货</span></p>
+                            <p>订单总计 <span>{{ piano.get('price').get('dollar') }}</span></p>
+                          </div>
+                          <div class="pay-meth">
+                            <h5>支付方式</h5>
+                            <ul>
+                              <li>
+                                <div class="checkbox">
+                                  <input id="checkbox3-1" class="styled" type="checkbox">
+                                  <label for="checkbox3-1"> 直接银行转账 </label>
+                                </div>
+                                <p>请将您的款项直接打入我们的银行账户。请使用您的订单ID作为付款参考。你的订单要到我们账户上的资金结清后才能发货。</p>
+                              </li>
+                              <li>
+                                <div class="checkbox">
+                                  <input id="checkbox3-2" class="styled" type="checkbox">
+                                  <label for="checkbox3-2"> 支票付款 </label>
+                                </div>
+                              </li>
+                              <li>
+                                <div class="checkbox">
+                                  <input id="checkbox3-3" class="styled" type="checkbox">
+                                  <label for="checkbox3-3"> PAYPAL </label>
+                                </div>
+                              </li>
+                              <li>
+                                <div class="checkbox">
+                                  <input id="checkbox3-4" class="styled" type="checkbox">
+                                  <label for="checkbox3-4"> 我已经阅读并接受了 <span class="color"> 条款 </span> </label>
+                                </div>
+                              </li>
+                            </ul>
+                              {# 问题6 #}
+                            <a onclick="MakeOrder()" class="btn btn-small btn-dark pull-right">下订单</a> </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+</body>
+<script src="../../static/js/sebian_js/wow.min.js"></script>
+<script src="../../static/js/sebian_js/bootstrap.min.js"></script>
+<script src="../../static/js/sebian_js/own-menu.js"></script>
+<script src="../../static/js/sebian_js/main.js"></script>
+<script src="{{ url_for('static',filename='script/jquery.min.js') }}"></script>
+<script src="{{ url_for('static',filename='script/socket.io.js') }}"></script>
+<script src="{{ url_for('static',filename='script/av-min.js') }}"></script>
+<script src="{{ url_for('static',filename='script/user.js') }}"></script>
+<script src="{{ url_for('static',filename='script/order.js') }}"></script>
+<script src="{{ url_for('static',filename='script/orderform.js') }}"></script>
+
+</html>

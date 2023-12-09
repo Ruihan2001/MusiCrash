@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{{ url_for('static',filename='script/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/socket.io.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/av-min.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/user.js') }}"></script>
+    <script src="{{ url_for('static',filename='script/LoginAnimation.js') }}"></script>
+    <link rel="stylesheet" href="../static/style/LogInAndSignUp.css">
+</head>
+<body>
+<p id="result"></p>
+<div class="box" id="box">
+    <div class="form-container sign-up-container">
+        <!-- sign up form -->
+            <h1>Sign Up</h1>
+            <!-- sign up input -->
+            <!-- username -->
+            <label>
+                username:
+                <input type="text" id="username">
+            </label>
+            <label>
+                password:
+                <input type="password" id="password">
+            </label>
+            <label>
+                confirm password:
+                <input type="password" id="repassword">
+            </label>
+            <label>
+                email:
+                <input type="email" id="email"><span></span>
+            </label>
+            <label>
+                phone:
+                <input type="text" id="phone"><span></span>
+            </label>
+            <!-- sign up -->
+            <button onclick="
+                signUp($('#username').val(),null,null,$('#password').val(),function(user) {
+                    alert('Register Successfully!');
+                    window.location.href = document.referrer;
+                document.getElementById('result').innerText='register success!';
+                console.log(user)
+                },function(error) {
+                document.getElementById('result').innerText=error;
+                console.log(error)
+                })"
+            >register</button>
+    </div>
+    <div class="form-container sign-in-container">
+        <!-- login form -->
+
+            <h1 style="margin-bottom: 30px">Log In</h1>
+            <!-- login input -->
+            <!-- username -->
+            <label>
+                username:
+                <input type="text" id="username2">
+            </label>
+            <label>
+                password:
+                <input type="password" id="password2">
+            </label>
+            <p><a href="{{ url_for('main.resetPassword')}}" style="color: black">Forget password?</a></p>
+            <br>
+            <!-- sign in button -->
+            <button onclick="
+                signInWithUsername($('#username2').val(),$('#password2').val(),function(user) {
+                    alert('login success!');
+                    window.location.href = document.referrer;
+                    document.getElementById('result').innerText='login success!'
+                    console.log(user);
+                },function(error) {
+                    alert('Fail to login.');
+                    document.getElementById('result').innerText=error
+                    console.log(error);
+                })
+            ">login</button>
+
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Has an account?</h1>
+                <p>Log in with your account</p>
+                <!-- jump to login part -->
+                <button class="ghost" id="signInPage">Log In</button>
+                <!-- link to index page -->
+                <p><a href="{{ url_for('main.index') }}">Back To Index</a></p>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Doesn't has an account?</h1>
+                <p>Join Us</p>
+                <!-- jump to sign up page -->
+                <button class="ghost" id="signUpPage">Sign Up</button>
+                <!-- link to index page -->
+                <p><a href="{{ url_for('main.index') }}">Back To Index</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static',filename='script/examine_en.js') }}"></script>
+
+</body>
+</html>
